@@ -24,7 +24,11 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        TODO("not implemented")
+        //val firstParts : List<String>? = firstName?.split("")
+        //val lastParts : List<String>? = firstName?.split("")
+        var firstNameInitial = firstName?.get(0)
+        var lastNameInitial = lastName?.get(0)
+        return "$firstNameInitial $lastNameInitial"
     }
 
 

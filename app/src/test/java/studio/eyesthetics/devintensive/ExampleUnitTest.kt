@@ -8,6 +8,7 @@ import studio.eyesthetics.devintensive.extensions.add
 import studio.eyesthetics.devintensive.extensions.format
 import studio.eyesthetics.devintensive.extensions.toUserView
 import studio.eyesthetics.devintensive.models.*
+import studio.eyesthetics.devintensive.utils.Utils
 import java.util.*
 
 /**
@@ -105,5 +106,30 @@ class ExampleUnitTest {
         println("User Name \" King\" = ${user8.firstName} ${user8.lastName}")
         println("User Name \"     King\" = ${user9.firstName} ${user9.lastName}")
         println("User Name \"Spin King\" = ${user10.firstName} ${user10.lastName}")
+    }
+
+    @Test
+    fun test_to_initials() {
+        val user = User.makeUser("")
+        val user2 = User.makeUser(" ")
+        val user3 = User.makeUser(null)
+        val user4 = User.makeUser("null")
+        val user5 = User.makeUser("Spin")
+        val user6 = User.makeUser("Spin ")
+        val user7 = User.makeUser("King")
+        val user8 = User.makeUser(" King")
+        val user9 = User.makeUser("     King")
+        val user10 = User.makeUser("Spin King")
+        //val res = Utils.toInitials(user.firstName, user.lastName)
+        println("User initials ${Utils.toInitials(user.firstName, user.lastName)}")
+        println("User initials ${Utils.toInitials(user2.firstName, user2.lastName)}")
+        println("User initials ${Utils.toInitials(user3.firstName, user3.lastName)}")
+        println("User initials ${Utils.toInitials(user4.firstName, user4.lastName)}")
+        println("User initials ${Utils.toInitials(user5.firstName, user5.lastName)}")
+        println("User initials ${Utils.toInitials(user6.firstName, user6.lastName)}")
+        println("User initials ${Utils.toInitials(user7.firstName, user7.lastName)}")
+        println("User initials ${Utils.toInitials(user8.firstName, user8.lastName)}")
+        println("User initials ${Utils.toInitials(user9.firstName, user9.lastName)}")
+        println("User initials ${Utils.toInitials(user10.firstName, user10.lastName)}")
     }
 }
