@@ -17,3 +17,4 @@ class ImageMessage(
     override fun formatMessage(): String = "id:$id ${from?.firstName}" +
             "${if(isIncoming) "получил" else " отправил" } изображение \"$image\"" //+ "${date.humanizeDiff()}"
 }
+//test git
