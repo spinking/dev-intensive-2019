@@ -81,4 +81,29 @@ class ExampleUnitTest {
         println(txtMessage.formatMessage())
         println(imgMessage.formatMessage())
     }
+
+    @Test
+    fun test_parse_full_name() {
+        val user = User.makeUser("")
+        val user2 = User.makeUser(" ")
+        val user3 = User.makeUser(null)
+        val user4 = User.makeUser("null")
+        val user5 = User.makeUser("Spin")
+        val user6 = User.makeUser("Spin ")
+        val user7 = User.makeUser("King")
+        val user8 = User.makeUser(" King")
+        val user9 = User.makeUser("     King")
+        val user10 = User.makeUser("Spin King")
+
+        println("User Name \"\" = ${user.firstName} ${user.lastName}")
+        println("User Name \" \" = ${user2.firstName} ${user2.lastName}")
+        println("User Name ${null} = ${user3.firstName} ${user3.lastName}")
+        println("User Name \"null\" = ${user4.firstName} ${user4.lastName}")
+        println("User Name \"Spin\" = ${user5.firstName} ${user5.lastName}")
+        println("User Name \"Spin \" = ${user6.firstName} ${user6.lastName}")
+        println("User Name \"King\" = ${user7.firstName} ${user7.lastName}")
+        println("User Name \" King\" = ${user8.firstName} ${user8.lastName}")
+        println("User Name \"     King\" = ${user9.firstName} ${user9.lastName}")
+        println("User Name \"Spin King\" = ${user10.firstName} ${user10.lastName}")
+    }
 }
