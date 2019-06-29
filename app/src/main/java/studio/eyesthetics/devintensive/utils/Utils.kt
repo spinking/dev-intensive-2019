@@ -19,17 +19,66 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider: String = " "): String {
-        TODO("not implemented")
+        val fullName : List<String> = payload.toLowerCase().split(" ")
+        var res = ""
+        for(word: String in fullName) {
+            var sb = ""
+            val charArray = word.toCharArray()
+            for(ch:Char in charArray.iterator()) {
+                val char = when(ch) {
+                    'а' -> "a"
+                    'б' -> "b"
+                    'в' -> "v"
+                    'г' -> "g"
+                    'д' -> "d"
+                    'е' -> "e"
+                    'ё' -> "e"
+                    'ж' -> "zh"
+                    'з' -> "z"
+                    'и' -> "i"
+                    'й' -> "i"
+                    'к' -> "k"
+                    'л' -> "l"
+                    'м' -> "m"
+                    'н' -> "n"
+                    'о' -> "o"
+                    'п' -> "p"
+                    'р' -> "r"
+                    'с' -> "s"
+                    'т' -> "t"
+                    'у' -> "u"
+                    'ф' -> "f"
+                    'х' -> "h"
+                    'ц' -> "c"
+                    'ч' -> "ch"
+                    'ш' -> "sh"
+                    'щ' -> "sh'"
+                    'ъ' -> ""
+                    'ы' -> "i"
+                    'ь' -> ""
+                    'э' -> "e"
+                    'ю' -> "yu"
+                    'я' -> "ya"
+                    else -> ch.toString()
+                }
+                sb = "$sb$char".capitalize()
+            }
+            if(res.isNotEmpty()) res = "$res$divider$sb"
+            else res = "$res$sb"
+        }
 
+        return "return $res"
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        //val firstParts : List<String>? = firstName?.split("")
-        //val lastParts : List<String>? = firstName?.split("")
-        var firstNameInitial = firstName?.get(0)
-        var lastNameInitial = lastName?.get(0)
-        return "$firstNameInitial $lastNameInitial"
+        if(firstName == null && lastName == null) return null
+        val first = "${firstName?.firstOrNull()?:""}${lastName?.firstOrNull()?:""}"
+        val p = Regex("\\s")
+        if(first.matches(p)) return null
+        return first.toUpperCase()
     }
+
+
 
 
 }

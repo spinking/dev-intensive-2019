@@ -85,51 +85,66 @@ class ExampleUnitTest {
 
     @Test
     fun test_parse_full_name() {
-        val user = User.makeUser("")
-        val user2 = User.makeUser(" ")
-        val user3 = User.makeUser(null)
-        val user4 = User.makeUser("null")
-        val user5 = User.makeUser("Spin")
-        val user6 = User.makeUser("Spin ")
-        val user7 = User.makeUser("King")
-        val user8 = User.makeUser(" King")
-        val user9 = User.makeUser("     King")
-        val user10 = User.makeUser("Spin King")
+        println(Utils.parseFullName(null))
+        println(Utils.parseFullName(""))
+        println(Utils.parseFullName(" "))
+        println(Utils.parseFullName("John"))
 
-        println("User Name \"\" = ${user.firstName} ${user.lastName}")
-        println("User Name \" \" = ${user2.firstName} ${user2.lastName}")
-        println("User Name ${null} = ${user3.firstName} ${user3.lastName}")
-        println("User Name \"null\" = ${user4.firstName} ${user4.lastName}")
-        println("User Name \"Spin\" = ${user5.firstName} ${user5.lastName}")
-        println("User Name \"Spin \" = ${user6.firstName} ${user6.lastName}")
-        println("User Name \"King\" = ${user7.firstName} ${user7.lastName}")
-        println("User Name \" King\" = ${user8.firstName} ${user8.lastName}")
-        println("User Name \"     King\" = ${user9.firstName} ${user9.lastName}")
-        println("User Name \"Spin King\" = ${user10.firstName} ${user10.lastName}")
+        /*Реализуй метод Utils.parseFullName(fullName) принимающий в качестве аргумента полное имя пользователя (null, пустую строку) и возвращающий пару значений Pair(firstName, lastName) при невозможности распарсить полное имя или его часть вернуть null null/"firstName" null
+        Пример:
+        Utils.parseFullName(null) //null null
+        Utils.parseFullName("") //null null
+        Utils.parseFullName(" ") //null null
+        Utils.parseFullName("John") //John null*/
+    }
+
+    @Test
+    fun test_date_format() {
+        println(Date().format())
+        println(Date().format("HH:mm"))
+
+        /*Реализуй extension Date.format(pattern) возвращающий отформатированную дату по паттерну передаваемому в качестве аргумента (значение по умолчанию "HH:mm:ss dd.MM.yy" локаль "ru")
+        Пример:
+        Date().format() //14:00:00 27.06.19
+        Date().format("HH:mm") //14:00*/
+    }
+
+    @Test
+    fun test_date_add() {
+        println(Date().add(2, TimeUnits.SECOND))
+        println(Date().add(-4, TimeUnits.DAY))
+
+        /*Реализуй extension Date.add(value, TimeUnits) добавляющий или вычитающий значение переданное первым аргументом в единицах измерения второго аргумента (enum TimeUnits [SECOND, MINUTE, HOUR, DAY]) и возвращающий модифицированный экземпляр Date
+                Пример:
+        Date().add(2, TimeUnits.SECOND) //Thu Jun 27 14:00:02 GST 2019
+        Date().add(-4, TimeUnits.DAY) //Thu Jun 23 14:00:00 GST 2019*/
     }
 
     @Test
     fun test_to_initials() {
-        val user = User.makeUser("")
-        val user2 = User.makeUser(" ")
-        val user3 = User.makeUser(null)
-        val user4 = User.makeUser("null")
-        val user5 = User.makeUser("Spin")
-        val user6 = User.makeUser("Spin ")
-        val user7 = User.makeUser("King")
-        val user8 = User.makeUser(" King")
-        val user9 = User.makeUser("     King")
-        val user10 = User.makeUser("Spin King")
-        //val res = Utils.toInitials(user.firstName, user.lastName)
-        println("User initials ${Utils.toInitials(user.firstName, user.lastName)}")
-        println("User initials ${Utils.toInitials(user2.firstName, user2.lastName)}")
-        println("User initials ${Utils.toInitials(user3.firstName, user3.lastName)}")
-        println("User initials ${Utils.toInitials(user4.firstName, user4.lastName)}")
-        println("User initials ${Utils.toInitials(user5.firstName, user5.lastName)}")
-        println("User initials ${Utils.toInitials(user6.firstName, user6.lastName)}")
-        println("User initials ${Utils.toInitials(user7.firstName, user7.lastName)}")
-        println("User initials ${Utils.toInitials(user8.firstName, user8.lastName)}")
-        println("User initials ${Utils.toInitials(user9.firstName, user9.lastName)}")
-        println("User initials ${Utils.toInitials(user10.firstName, user10.lastName)}")
+        println(Utils.toInitials("john" ,"doe"))
+        println(Utils.toInitials("John", null))
+        println(Utils.toInitials(null, null))
+        println(Utils.toInitials(" ", ""))
+
+       /* Реализуй метод Utils.toInitials(firstName lastName) принимающий в качестве аргументов имя и фамилию пользователя (null, пустую строку) и возвращающий строку с первыми буквами имени и фамилии в верхнем регистре (если один из аргументов null то вернуть один инициал, если оба аргумента null вернуть null)
+        Пример:
+        Utils.toInitials("john" ,"doe") //JD
+        Utils.toInitials("John", null) //J
+        Utils.toInitials(null, null) //null
+        Utils.toInitials(" ", "") //null*/
+    }
+
+
+
+    @Test
+    fun test_to_transliteration() {
+        println(Utils.transliteration("Иван Стереотипов"))
+        println(Utils.transliteration("Amazing Петр","_"))
+
+        /*Реализуй метод Utils.transliteration(payload divider) принимающий в качестве аргумента строку (divider по умолчанию " ") и возвращающий преобразованную строку из латинских символов, словарь символов соответствия алфовитов доступен в ресурсах к заданию
+        Пример:
+        Utils.transliteration("Иван Стереотипов") //Ivan Stereotipov
+        Utils.transliteration("Amazing Петр","_") //Amazing_Petr*/
     }
 }
