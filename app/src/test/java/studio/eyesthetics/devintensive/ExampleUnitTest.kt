@@ -3,10 +3,7 @@ package studio.eyesthetics.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
-import studio.eyesthetics.devintensive.extensions.TimeUnits
-import studio.eyesthetics.devintensive.extensions.add
-import studio.eyesthetics.devintensive.extensions.format
-import studio.eyesthetics.devintensive.extensions.toUserView
+import studio.eyesthetics.devintensive.extensions.*
 import studio.eyesthetics.devintensive.models.*
 import studio.eyesthetics.devintensive.utils.Utils
 import java.util.*
@@ -122,10 +119,10 @@ class ExampleUnitTest {
 
     @Test
     fun test_to_initials() {
-        println(Utils.toInitials("john" ,"doe"))
-        println(Utils.toInitials("John", null))
-        println(Utils.toInitials(null, null))
-        println(Utils.toInitials(" ", ""))
+        assertEquals(Utils.toInitials("John", "doe"), "JD")
+        assertEquals(Utils.toInitials("John", null), "J")
+        assertEquals(Utils.toInitials(null, null), null)
+        assertEquals(Utils.toInitials(" ", ""), null)
 
        /* Реализуй метод Utils.toInitials(firstName lastName) принимающий в качестве аргументов имя и фамилию пользователя (null, пустую строку) и возвращающий строку с первыми буквами имени и фамилии в верхнем регистре (если один из аргументов null то вернуть один инициал, если оба аргумента null вернуть null)
         Пример:
@@ -139,12 +136,32 @@ class ExampleUnitTest {
 
     @Test
     fun test_to_transliteration() {
-        println(Utils.transliteration("Иван Стереотипов"))
-        println(Utils.transliteration("Amazing Петр","_"))
+        assertEquals(Utils.transliteration("Иван Стереотипов"), "Ivan Stereotipov")
+        assertEquals(Utils.transliteration("Amazing Петр","_"), "Amazing_Petr")
+        assertEquals(Utils.transliteration("оЖЖо","_"), "oZhZho")
 
         /*Реализуй метод Utils.transliteration(payload divider) принимающий в качестве аргумента строку (divider по умолчанию " ") и возвращающий преобразованную строку из латинских символов, словарь символов соответствия алфовитов доступен в ресурсах к заданию
         Пример:
         Utils.transliteration("Иван Стереотипов") //Ivan Stereotipov
         Utils.transliteration("Amazing Петр","_") //Amazing_Petr*/
+    }
+
+    @Test
+    fun test_to_humanizeDiff() {
+        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff())
+        println(Date().add(-5, TimeUnits.DAY).humanizeDiff())
+        println(Date().add(2, TimeUnits.MINUTE).humanizeDiff())
+        println(Date().add(7, TimeUnits.DAY).humanizeDiff())
+        println(Date().add(-400, TimeUnits.DAY).humanizeDiff())
+        println(Date().add(400, TimeUnits.MINUTE).humanizeDiff())
+
+        /*Реализуй extension Date.humanizeDiff(date) (значение по умолчанию текущий момент времени) для форматирования вывода разницы между датами в человекообразном формате, с учетом склонения числительных. Временные интервалы преобразований к человекообразному формату доступны в ресурсах к заданию
+        Пример:
+        Date().add(-2, TimeUnits.HOUR).humanizeDiff() //2 часа назад
+        Date().add(-5, TimeUnits.DAY).humanizeDiff() //5 дней назад
+        Date().add(2, TimeUnits.MINUTE).humanizeDiff() //через 2 минуты
+        Date().add(7, TimeUnits.DAY).humanizeDiff() //через 7 дней
+        Date().add(-400, TimeUnits.DAY).humanizeDiff() //более года назад
+        Date().add(400, TimeUnits.MINUTE).humanizeDiff() //более чем через год*/
     }
 }

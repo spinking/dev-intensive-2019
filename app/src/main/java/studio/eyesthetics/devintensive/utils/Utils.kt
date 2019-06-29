@@ -19,7 +19,7 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider: String = " "): String {
-        val fullName : List<String> = payload.toLowerCase().split(" ")
+        val fullName : List<String> = payload.split(" ")
         var res = ""
         for(word: String in fullName) {
             var sb = ""
@@ -59,15 +59,49 @@ object Utils {
                     'э' -> "e"
                     'ю' -> "yu"
                     'я' -> "ya"
+
+                    'А' -> "A"
+                    'Б' -> "B"
+                    'В' -> "V"
+                    'Г' -> "G"
+                    'Д' -> "D"
+                    'Е' -> "E"
+                    'Ё' -> "E"
+                    'Ж' -> "Zh"
+                    'З' -> "Z"
+                    'И' -> "I"
+                    'Й' -> "I"
+                    'К' -> "K"
+                    'Л' -> "L"
+                    'М' -> "M"
+                    'Н' -> "N"
+                    'О' -> "O"
+                    'П' -> "P"
+                    'Р' -> "R"
+                    'С' -> "S"
+                    'Т' -> "T"
+                    'У' -> "U"
+                    'Ф' -> "F"
+                    'Х' -> "H"
+                    'Ц' -> "C"
+                    'Ч' -> "Ch"
+                    'Ш' -> "Sh"
+                    'Щ' -> "Sh'"
+                    'Ъ' -> ""
+                    'Ы' -> "I"
+                    'Ь' -> ""
+                    'Э' -> "E"
+                    'Ю' -> "Yu"
+                    'Я' -> "Ya"
                     else -> ch.toString()
                 }
-                sb = "$sb$char".capitalize()
+                sb = "$sb$char"
             }
             if(res.isNotEmpty()) res = "$res$divider$sb"
             else res = "$res$sb"
         }
 
-        return "return $res"
+        return res
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
