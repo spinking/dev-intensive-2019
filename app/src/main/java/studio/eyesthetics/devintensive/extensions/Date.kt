@@ -88,9 +88,11 @@ private fun yearAsPlurals(value: Long) = when(value.asPlurals) {
 
 val Long.asPlurals
     get() = when {
-        this in 5L..20L -> Plurals.MANY
+
+        this % 100L in 5L..20L -> Plurals.MANY
         this % 10L == 1L -> Plurals.ONE
         this % 10L in 2L..4L -> Plurals.FEW
+
         else -> Plurals.MANY
     }
 

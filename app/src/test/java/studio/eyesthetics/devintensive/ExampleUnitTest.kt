@@ -192,9 +192,10 @@ class ExampleUnitTest {
 
     @Test
     fun test_to_humanizeDiff_2() {
+        val new = Date()
 
-        //assertEquals("только что", Date().add(-1, TimeUnits.SECOND).humanizeDiff(Date()))
-        //assertEquals("несколько секунд назад", Date().add(-45, TimeUnits.SECOND).humanizeDiff(Date()))
+        assertEquals("только что", Date().add(-1, TimeUnits.SECOND).humanizeDiff(new))
+        assertEquals("несколько секунд назад", Date().add(-45, TimeUnits.SECOND).humanizeDiff(new))
         assertEquals("минуту назад", Date().add(-46, TimeUnits.SECOND).humanizeDiff(Date()))
         assertEquals("1 минуту назад", Date().add(-76, TimeUnits.SECOND).humanizeDiff(Date()))
         assertEquals("минуту назад", Date().add(-1, TimeUnits.MINUTE).humanizeDiff(Date()))
@@ -213,6 +214,11 @@ class ExampleUnitTest {
         assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff(Date()))
         assertEquals("360 дней назад", Date().add(-360, TimeUnits.DAY).humanizeDiff(Date()))
         assertEquals("более года назад", Date().add(-361, TimeUnits.DAY).humanizeDiff(Date()))
+        assertEquals("20 часов назад", Date().add(-20, TimeUnits.HOUR).humanizeDiff(Date()))
+        assertEquals("21 час назад", Date().add(-21, TimeUnits.HOUR).humanizeDiff(Date()))
+        assertEquals("111 дней назад", Date().add(-111, TimeUnits.DAY).humanizeDiff(Date()))
+        assertEquals("1 час назад", Date().add(-111, TimeUnits.MINUTE).humanizeDiff(Date()))
+        assertEquals("15 минут назад", Date().add(-15, TimeUnits.MINUTE).humanizeDiff(Date()))
 
         assertEquals("через несколько секунд", Date().add(1, TimeUnits.SECOND).humanizeDiff(Date()))
         assertEquals("через несколько секунд", Date().add(2, TimeUnits.SECOND).humanizeDiff(Date()))
