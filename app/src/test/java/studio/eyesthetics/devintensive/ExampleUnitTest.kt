@@ -32,6 +32,30 @@ class ExampleUnitTest {
         val user2 = user.copy(id = "2", lastName = "Cena")
         print("$user \n$user2")
     }
+
+    @Test
+    fun test_builder() {
+        val user = User.Builder("1").id("2")
+            .firstName("John")
+            .lastName("Wick")
+            .avatar("avatar")
+            .rating(1)
+            .respect(2)
+            .lastVisit(Date().add(-5, TimeUnits.MINUTE))
+            .isOnline(false)
+            .build()
+        val user2 = User.Builder("3")
+            .firstName("John")
+            .respect(3)
+            .isOnline(true)
+            .build()
+        val user3 = User.Builder("4")
+
+        println("$user")
+        println("$user2")
+        println("$user3")
+    }
+
     @Test
     fun test_decomposition() {
         val user = User.makeUser("John Wick")
@@ -148,12 +172,12 @@ class ExampleUnitTest {
 
     @Test
     fun test_to_humanizeDiff() {
-        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff())
-        println(Date().add(-5, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(2, TimeUnits.MINUTE).humanizeDiff())
-        println(Date().add(7, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(-400, TimeUnits.DAY).humanizeDiff())
-        println(Date().add(400, TimeUnits.DAY).humanizeDiff())
+        assertEquals("2 часа назад", Date().add(-2, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff())
+        assertEquals("через 2 минуты", Date().add(2, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("через 7 дней", Date().add(7, TimeUnits.DAY).humanizeDiff())
+        assertEquals("более года назад", Date().add(-400, TimeUnits.DAY).humanizeDiff())
+        assertEquals("более чем через год", Date().add(400, TimeUnits.DAY).humanizeDiff())
 
         /*Реализуй extension Date.humanizeDiff(date) (значение по умолчанию текущий момент времени) для форматирования вывода разницы между датами в человекообразном формате, с учетом склонения числительных. Временные интервалы преобразований к человекообразному формату доступны в ресурсах к заданию
         Пример:
