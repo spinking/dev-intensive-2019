@@ -1,6 +1,6 @@
-package studio.eyesthetics.devintensive.models
+package ru.skillbranch.devintensive.models
 
-import studio.eyesthetics.devintensive.utils.Utils
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 /**

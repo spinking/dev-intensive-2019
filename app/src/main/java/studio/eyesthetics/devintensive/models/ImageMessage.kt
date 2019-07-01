@@ -1,6 +1,6 @@
-package studio.eyesthetics.devintensive.models
+package ru.skillbranch.devintensive.models
 
-import studio.eyesthetics.devintensive.extensions.humanizeDiff
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import java.util.*
 
 /**

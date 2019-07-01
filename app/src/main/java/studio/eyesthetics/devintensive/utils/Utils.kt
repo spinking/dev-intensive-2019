@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.utils
+package ru.skillbranch.devintensive.utils
 
 /**
  * Created by Spinking on 27.06.2019.
@@ -10,11 +10,11 @@ object Utils {
         val parts : List<String>? = fullName?.split(" ")
 
         var firstName = parts?.getOrNull(0)
+
         var lastName = parts?.getOrNull(1)
 
         if(firstName == "") firstName = null
         if(lastName == "") lastName = null
-        //return Pair(firstName, lastName)
         return firstName to lastName
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="studio.eyesthetics.devintensive">
+          package="ru.skillbranch.devintensive">
 
     <application
             android:allowBackup="true"
