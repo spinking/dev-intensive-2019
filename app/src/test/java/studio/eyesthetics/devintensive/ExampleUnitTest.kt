@@ -349,8 +349,8 @@ class ExampleUnitTest {
             "https://anyurl.com",
             true)
 
-        assertEquals("id:0 Василий отправил сообщение \"any text message\" только что", msg_1.formatMessage())
-        assertEquals("id:1 Василий получил изображение \"https://anyurl.com\" 2 часа назад", msg_2.formatMessage())
+        assertEquals("Василий отправил сообщение \"any text message\" только что", msg_1.formatMessage())
+        assertEquals("Василий получил изображение \"https://anyurl.com\" 2 часа назад", msg_2.formatMessage())
     }
 
 
