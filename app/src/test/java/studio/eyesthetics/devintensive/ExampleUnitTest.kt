@@ -433,5 +433,14 @@ class ExampleUnitTest {
         assertEquals(null,  Utils.toInitials(null, null) )
         assertEquals(null,  Utils.toInitials(" ", "") )
     }
+
+    @Test
+    fun test_messages() {
+        val user = User.makeUser("Максим Никельман")
+        val chat = Chat("1")
+        val date = Date()
+        assertEquals("Максим отправил сообщение \"any text message\" только что", BaseMessage.makeMessage(user, chat, date, "text", "any text message").formatMessage())
+        assertEquals("Максим получил изображение \"https://anyurl.com\" 2 часа назад", BaseMessage.makeMessage(user, chat, date.add(-2, TimeUnits.HOUR), "image", "https://anyurl.com",true).formatMessage())
+    }
     //=================================================================
 }
