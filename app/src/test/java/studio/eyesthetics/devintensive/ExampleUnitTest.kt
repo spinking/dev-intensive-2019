@@ -443,4 +443,10 @@ class ExampleUnitTest {
         assertEquals("Максим получил изображение \"https://anyurl.com\" 2 часа назад", BaseMessage.makeMessage(user, chat, date.add(-2, TimeUnits.HOUR), "image", "https://anyurl.com",true).formatMessage())
     }
     //=================================================================
+
+    @Test
+    fun test_id() {
+        val user = User.Builder().build()
+        println(user.id)
+    }
 }

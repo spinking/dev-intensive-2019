@@ -33,8 +33,8 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
 fun Date.humanizeDiff(date: Date = Date()): String {
     var duration = (date.time - this.time)
     var res: String = when(duration) {
-        in 0 * SECOND..1 * SECOND -> "только что"
-        in (1 * SECOND + 1)..45 * SECOND  -> "несколько секунд назад"
+        in 0 * SECOND..(2 * SECOND - 1) -> "только что"
+        in 2 * SECOND ..45 * SECOND  -> "несколько секунд назад"
         in (45 * SECOND + 1)..75 * SECOND -> "минуту назад"
         in (75 * SECOND + 1)..45 * MINUTE -> "${minuteAsPlurals(duration / MINUTE)} назад"
         in (45* MINUTE + 1)..75 * MINUTE -> "час назад"

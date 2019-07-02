@@ -28,7 +28,7 @@ data class User (
     constructor(id:String) : this(id, "John", "Doe")
 
     data class Builder(
-        var id : String,
+        var id : String = "0",
         var firstName : String? = null,
         var lastName : String? = null,
         var avatar : String? = null,
