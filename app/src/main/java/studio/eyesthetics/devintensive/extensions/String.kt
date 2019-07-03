@@ -4,7 +4,9 @@ import android.text.Html
 
 fun String.truncate(index: Int = 16): String {
     if(this.length < index) return this.trim()
-    return "${this.substring(0, index).trim()}..."
+    var str = this.substring(0, index)
+    if(str.takeLast(length) == " ") str = str.substring(0, length - 1)
+    return "${this.substring(0, index)}..."
 }
 
 fun String.stripHtml(): String {
