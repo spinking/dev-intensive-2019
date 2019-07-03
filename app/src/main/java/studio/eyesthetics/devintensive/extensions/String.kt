@@ -4,7 +4,10 @@ import android.text.Html
 
 fun String.truncate(index: Int = 16): String {
     var str = this
-    if(this.length < index) return this
+    if(str.length < index) {
+        if(str.takeLast(1) == " ") return this.dropLast(1)
+        else return  this
+    }
     str = this.substring(0, index)
     if(str.takeLast(length) == " ") str = str.substring(0, length - 1)
     return "${this.substring(0, index)}..."

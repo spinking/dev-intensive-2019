@@ -470,15 +470,15 @@ class ExampleUnitTest {
 
     @Test
     fun test_truncate() {
-        //assertEquals("Bender Bending R...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate())
-        //assertEquals("Bender Bending...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(14))
-        //assertEquals("Bender Bending R...", "Bender Bending Rod".truncate())
-        //assertEquals("Bender Bending R...", "Bender Bending R".truncate())
-        //assertEquals("Bender Bending", "Bender Bending".truncate())
+        assertEquals("Bender Bending R...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate())
+        assertEquals("Bender Bending...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(14))
+        assertEquals("Bender Bending R...", "Bender Bending Rod".truncate())
+        assertEquals("Bender Bending R...", "Bender Bending R".truncate())
+        assertEquals("Bender Bending", "Bender Bending".truncate())
         assertEquals("", " ".truncate())
         assertEquals(" ", "  ".truncate())
-        //assertEquals("A", "A ".truncate(3))
-        //println("                        раз        два     ".truncate(10))
+        assertEquals("A", "A ".truncate(3))
+        println("                        раз        два     ".truncate(10))
         /*Реализуй extension усекающий исходную строку до указанного числа символов (по умолчанию 16) и возвращающий
         усеченную строку с заполнителем "..." если последний символ усеченной строки является пробелом - удалить его и добавить заполнитель
         Пример:
