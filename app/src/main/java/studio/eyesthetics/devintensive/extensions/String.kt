@@ -9,7 +9,7 @@ fun String.truncate(index: Int = 16): String {
         else return  this
     }
     str = this.substring(0, index)
-    if(str.takeLast(length) == " ") str = str.substring(0, length - 1)
+    if(str.takeLast(1) == " ") str = str.dropLast(1)
     return "${this.substring(0, index)}..."
 }
 
