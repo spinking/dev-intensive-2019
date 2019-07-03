@@ -449,4 +449,20 @@ class ExampleUnitTest {
         val user = User.Builder().build()
         println(user.id)
     }
+
+    @Test
+    fun test_plurals_time_units() {
+        assertEquals("1 секунду", TimeUnits.SECOND.plural(1))
+        assertEquals("4 минуты", TimeUnits.MINUTE.plural(4))
+        assertEquals("19 часов", TimeUnits.HOUR.plural(19))
+        assertEquals("222 дня", TimeUnits.DAY.plural(222))
+
+        /*Реализуй метод plural для всех перечислений TimeUnits следующего вида TimeUnits.SECOND.plural(value:Int)
+        возвращающую значение с праильно склоненной единицой измерения
+        Пример:
+        TimeUnits.SECOND.plural(1) //1 секунду
+        TimeUnits.MINUTE.plural(4) //4 минуты
+        TimeUnits.HOUR.plural(19) //19 часов
+        TimeUnits.HOUR.plural(222) //222 дня*/
+    }
 }
