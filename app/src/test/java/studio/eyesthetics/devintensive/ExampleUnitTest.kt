@@ -7,6 +7,8 @@ import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
+import studio.eyesthetics.devintensive.extensions.stripHtml
+import studio.eyesthetics.devintensive.extensions.truncate
 import java.util.*
 
 /**
@@ -464,5 +466,35 @@ class ExampleUnitTest {
         TimeUnits.MINUTE.plural(4) //4 минуты
         TimeUnits.HOUR.plural(19) //19 часов
         TimeUnits.HOUR.plural(222) //222 дня*/
+    }
+
+    @Test
+    fun test_truncate() {
+        assertEquals("Bender Bending R...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate())
+        assertEquals("Bender Bending...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(14))
+        assertEquals("Bender Bending R...", "Bender Bending Rod".truncate())
+        assertEquals("Bender Bending R...", "Bender Bending R".truncate())
+        assertEquals("Bender Bending", "Bender Bending".truncate())
+        assertEquals("", " ".truncate())
+        assertEquals("", "  ".truncate())
+        assertEquals("A", "A ".truncate(3))
+        /*Реализуй extension усекающий исходную строку до указанного числа символов (по умолчанию 16) и возвращающий
+        усеченную строку с заполнителем "..." если последний символ усеченной строки является пробелом - удалить его и добавить заполнитель
+        Пример:
+        "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate() //Bender Bending Ro...
+        "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(14) //Bender Bending...*/
+    }
+
+    @Test
+    fun test_html() {
+        assertEquals("Образовательное IT-сообщество Skill Branch", "<p class=\"title\">Образовательное IT-сообщество Skill Branch</p>".stripHtml())
+        assertEquals("Образовательное IT-сообщество Skill Branch", "<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml())
+        assertEquals("Образовательное IT-сообщество Skill Branch", "&#xA0;Образовательное       IT-сообщество Skill Branch&#xA0;".stripHtml())
+        println("<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml())
+        /*Реализуй extension позволяющий очистить строку от html тегов и html escape последовательностей ("& < > ' ""),
+         а так же удалить пустые символы (пробелы) между словами если их больше 1. Необходимо вернуть модифицированную строку
+        Пример:
+        "<p class="title">Образовательное IT-сообщество Skill Branch</p>".stripHtml() //Образовательное IT-сообщество Skill Branch
+        "<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml() //Образовательное IT-сообщество Skill Branch*/
     }
 }
