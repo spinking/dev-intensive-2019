@@ -3,6 +3,9 @@ package ru.skillbranch.devintensive.extensions
 import ru.skillbranch.devintensive.models.User
 import ru.skillbranch.devintensive.models.UserView
 import ru.skillbranch.devintensive.utils.Utils
+
+import studio.eyesthetics.devintensive.extensions.truncate
+import studio.eyesthetics.devintensive.extensions.stripHtml
 import java.util.*
 
 /**

@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import ru.skillbranch.devintensive.extensions.*
+
 /**
  * Created by Spinking on 27.06.2019.
  */

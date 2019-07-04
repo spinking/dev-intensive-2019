@@ -1,5 +1,7 @@
 package studio.eyesthetics.devintensive.extensions
 
+import studio.eyesthetics.devintensive.extensions.truncate
+import studio.eyesthetics.devintensive.extensions.stripHtml
 
 fun String.truncate(index: Int = 16) :String {
     val str = this.trim()

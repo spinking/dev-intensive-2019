@@ -1,5 +1,8 @@
 package ru.skillbranch.devintensive.models
 
+import studio.eyesthetics.devintensive.extensions.truncate
+import studio.eyesthetics.devintensive.extensions.stripHtml
+
 /**
  * Created by BashkatovSM on 28.06.2019
  */
