@@ -2,8 +2,6 @@ package ru.skillbranch.devintensive.models
 
 import ru.skillbranch.devintensive.extensions.humanizeDiff
 import java.util.*
-import studio.eyesthetics.devintensive.extensions.truncate
-import studio.eyesthetics.devintensive.extensions.stripHtml
 
 /**
  * Created by BashkatovSM on 28.06.2019
