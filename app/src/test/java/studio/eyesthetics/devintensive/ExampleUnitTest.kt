@@ -7,8 +7,6 @@ import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
-import studio.eyesthetics.devintensive.extensions.stripHtml
-import studio.eyesthetics.devintensive.extensions.truncate
 import java.util.*
 
 /**
@@ -506,3 +504,5 @@ class ExampleUnitTest {
         "<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml() //Образовательное IT-сообщество Skill Branch*/
     }
 }
+
+
