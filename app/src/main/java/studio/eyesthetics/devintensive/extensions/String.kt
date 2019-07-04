@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.extensions
+package ru.skillbranch.devintensive.extensions
 
 fun String.truncate(index: Int = 16) :String {
     val str = this.trim()
