@@ -2,6 +2,7 @@ package ru.skillbranch.devintensive
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
