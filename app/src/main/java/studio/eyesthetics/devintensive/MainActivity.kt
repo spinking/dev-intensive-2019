@@ -48,22 +48,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*rootLayout = layoutRoot
-        rootLayout.viewTreeObserver.addOnGlobalLayoutListener { ViewTreeObserver.OnGlobalLayoutListener() {
-            fun onGlobalLayout(): Unit {
-                fun dpToPx(context: Context, valueInDp: Float): Float {
-                    val metrics: DisplayMetrics = context.resources.displayMetrics
-                    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics)
-                }
-                val heightDiff = rootLayout.rootView.height - rootLayout.height
-                if(heightDiff > dpToPx(this, 200f)) {
-
-                }
-
-            }
-
-        } }*/
-
         val editTextAnswer = savedInstanceState?.getString("EDITTEXT") ?: ""
 
 
@@ -198,7 +182,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send) {
             doIt()
-            //hideKeyboard()
+            hideKeyboard()
         }
     }
 
