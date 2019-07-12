@@ -15,18 +15,23 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     fun listenAnswer(answer: String) : Pair<String, Triple<Int, Int, Int>> {
-        return if(question.answers.contains(answer)) {
-            question = question.nextQuestion()
-            "Отлично - ты справился\n${question.question}" to status.color
-        } else {
-            status = status.nextStatus()
-            if(status == Status.NORMAL) {
-                question = question.firstQuestion()
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
-            } else {
-                "Это неправильный ответ\n${question.question}" to status.color
-        }
 
+        if(validation(answer)) {
+            return if(question.answers.contains(answer.toLowerCase())) {
+                question = question.nextQuestion()
+                "Отлично - ты справился\n${question.question}" to status.color
+            } else {
+                status = status.nextStatus()
+                if(status == Status.NORMAL) {
+                    question = question.firstQuestion()
+                    "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                } else {
+                    "Это неправильный ответ\n${question.question}" to status.color
+                }
+            }
+
+        } else {
+            return validationAnswer() to status.color
         }
     }
 
@@ -67,6 +72,28 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
         abstract fun nextQuestion(): Question
         fun firstQuestion(): Question = NAME
+    }
+
+    private fun validation(answer: String): Boolean {
+        return when(question) {
+            Question.NAME -> answer == answer.capitalize()
+            Question.PROFESSION -> answer == "${answer.first().toLowerCase()}${answer.substring(1, answer.length)}"
+            Question.MATERIAL -> (answer.matches(Regex("\\D+")))
+            Question.BDAY -> answer.matches(Regex("\\d+"))
+            Question.SERIAL -> answer.matches(Regex("^[\\d]{7}\$"))
+                else -> false
+        }
+    }
+
+    private fun validationAnswer(): String {
+        return when(question) {
+            Question.NAME -> "Имя должно начинаться с заглавной буквы\nКак меня зовут?"
+            Question.PROFESSION -> "Профессия должна начинаться со строчной буквы\nНазови мою профессию?"
+            Question.MATERIAL -> "Материал не должен содержать цифр\nИз чего я сделан?"
+            Question.BDAY -> "Год моего рождения должен содержать только цифры\nКогда меня создали?"
+            Question.SERIAL -> "Серийный номер содержит только цифры, и их 7\nМой серийный номер?"
+            else -> "На этом все, вопросов больше нет"
+        }
     }
 
 }
