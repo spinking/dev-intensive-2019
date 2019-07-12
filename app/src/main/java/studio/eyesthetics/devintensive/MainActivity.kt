@@ -1,17 +1,12 @@
 package ru.skillbranch.devintensive
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.View
-import android.view.ViewTreeObserver
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -19,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import studio.eyesthetics.devintensive.extensions.hideKeyboard
+
 import studio.eyesthetics.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEditorActionListener {

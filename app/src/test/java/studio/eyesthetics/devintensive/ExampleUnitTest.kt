@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive
 
+import android.app.Activity
 import org.junit.Assert
 import org.junit.Test
 
@@ -7,6 +8,8 @@ import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
+import studio.eyesthetics.devintensive.extensions.hideKeyboard
+import studio.eyesthetics.devintensive.extensions.isKeyboardOpen
 import java.util.*
 
 /**
