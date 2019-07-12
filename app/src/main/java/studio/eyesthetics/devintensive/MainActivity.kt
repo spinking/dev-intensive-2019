@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import studio.eyesthetics.devintensive.extensions.hideKeyboard
+import studio.eyesthetics.devintensive.extensions.isKeyboardOpen
 
 import studio.eyesthetics.devintensive.models.Bender
 
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     lateinit var messageEt: EditText
     lateinit var sendBtn: ImageView
     lateinit var benderObj: Bender
-    lateinit var rootLayout: LinearLayout
 
 
 /**
@@ -178,7 +178,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send) {
             doIt()
-            hideKeyboard()
+            if(isKeyboardOpen()) {
+                hideKeyboard()
+            }
         }
     }
 

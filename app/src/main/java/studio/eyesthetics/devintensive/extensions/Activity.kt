@@ -1,9 +1,10 @@
 package studio.eyesthetics.devintensive.extensions
 
 import android.app.Activity
-import android.content.Context
+import android.graphics.Rect
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+
 
 /**
  * Created by BashkatovSM on 12.07.2019
@@ -13,17 +14,20 @@ fun Activity.hideKeyboard() {
     hideKeyboard(if (currentFocus == null) View(this) else currentFocus)
 }
 
-fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+fun Activity.isKeyboardOpen(): Boolean{
+    val rootView = findViewById<View>(android.R.id.content)
+    val rect = Rect()
+    rootView.getWindowVisibleDisplayFrame(rect)
+    val heightDiff = rootView.height - rect.height()
+    val err = this.dpToPx(20F)
+    Log.d("M_", "${heightDiff > err}")
+
+    return heightDiff > err
 }
-/*
-fun Activity.isKeyboardOpen() {
-    val rootView: View = this.window.decorView
-    val metrics: DisplayMetrics = this.resources.displayMetrics
-    val height = metrics.heightPixels
-    val rootHeight = rootView.getWindowVisibleDisplayFrame(Rect())
-    Log.d("M_Activity", "isKeyboardOpen")
-}*/
+
+fun Activity.isKeyboardClosed(): Boolean {
+    return this.isKeyboardOpen().not()
+}
+
 
 
