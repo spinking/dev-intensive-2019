@@ -12,9 +12,5 @@ fun Context.hideKeyboard(view: View) {
 }
 
 fun Context.dpToPx (dp: Float): Float {
-    return TypedValue.applyDimension (
-        TypedValue.COMPLEX_UNIT_DIP ,
-        dp,
-        this. resources . displayMetrics
-    )
+    return TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_DIP , dp, this.resources.displayMetrics)
 }

@@ -2,7 +2,6 @@ package studio.eyesthetics.devintensive.extensions
 
 import android.app.Activity
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
 
 
@@ -20,14 +19,11 @@ fun Activity.isKeyboardOpen(): Boolean{
     rootView.getWindowVisibleDisplayFrame(rect)
     val heightDiff = rootView.height - rect.height()
     val err = this.dpToPx(20F)
-    Log.d("M_", "${heightDiff > err}")
 
     return heightDiff > err
 }
 
-fun Activity.isKeyboardClosed(): Boolean {
-    return this.isKeyboardOpen().not()
-}
+fun Activity.isKeyboardClosed(): Boolean = !this.isKeyboardOpen()
 
 
 

@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import studio.eyesthetics.devintensive.extensions.hideKeyboard
+import studio.eyesthetics.devintensive.extensions.isKeyboardClosed
 import studio.eyesthetics.devintensive.extensions.isKeyboardOpen
 
 import studio.eyesthetics.devintensive.models.Bender
@@ -178,6 +179,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send) {
             doIt()
+            isKeyboardClosed()
             if(isKeyboardOpen()) {
                 hideKeyboard()
             }
