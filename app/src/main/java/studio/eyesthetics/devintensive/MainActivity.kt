@@ -1,24 +1,33 @@
 package ru.skillbranch.devintensive
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.util.TypedValue
+import android.view.KeyEvent
 import android.view.View
+import android.view.ViewTreeObserver
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.eyesthetics.devintensive.extensions.hideKeyboard
 import studio.eyesthetics.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEditorActionListener {
     lateinit var benderImage: ImageView
     lateinit var textTxt: TextView
     lateinit var messageEt: EditText
     lateinit var sendBtn: ImageView
     lateinit var benderObj: Bender
+    lateinit var rootLayout: LinearLayout
 
 
 /**
@@ -39,6 +48,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*rootLayout = layoutRoot
+        rootLayout.viewTreeObserver.addOnGlobalLayoutListener { ViewTreeObserver.OnGlobalLayoutListener() {
+            fun onGlobalLayout(): Unit {
+                fun dpToPx(context: Context, valueInDp: Float): Float {
+                    val metrics: DisplayMetrics = context.resources.displayMetrics
+                    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics)
+                }
+                val heightDiff = rootLayout.rootView.height - rootLayout.height
+                if(heightDiff > dpToPx(this, 200f)) {
+
+                }
+
+            }
+
+        } }*/
+
+
 
         benderImage = iv_bender
         textTxt = tv_text
@@ -55,6 +81,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
+        messageEt.setOnEditorActionListener(this)
     }
 
     /**
@@ -166,11 +193,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send) {
-            val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
-            messageEt.setText("")
-            val (r, g, b) = color
-            benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
-            textTxt.text = phrase
+            doIt()
+            //hideKeyboard()
         }
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+
+        if(actionId == EditorInfo.IME_ACTION_DONE) doIt()
+        return false
+    }
+
+    private fun doIt() {
+        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
+        messageEt.setText("")
+        val (r, g, b) = color
+        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+        textTxt.text = phrase
     }
 }
