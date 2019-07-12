@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editTextAnswer = savedInstanceState?.getString("EDITTEXT") ?: ""
-
 
         benderImage = iv_bender
         textTxt = tv_text
@@ -55,7 +53,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
 
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
-        messageEt.setText(editTextAnswer)
 
         benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
 
@@ -172,7 +169,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
 
         outState?.putString("STATUS", benderObj.status.name)
         outState?.putString("QUESTION", benderObj.question.name)
-        outState?.putString("EDITTEXT", et_message.text.toString())
         Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
 
