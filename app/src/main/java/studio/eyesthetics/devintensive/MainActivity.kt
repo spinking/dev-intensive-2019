@@ -173,9 +173,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     override fun onClick(v: View?) {
         if(v?.id == R.id.iv_send) {
             doIt()
-            if(isKeyboardOpen()) {
-                hideKeyboard()
-            }
+            if(isKeyboardOpen()) hideKeyboard()
         }
     }
 

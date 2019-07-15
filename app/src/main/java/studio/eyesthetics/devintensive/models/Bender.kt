@@ -42,11 +42,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         CRITICAL(Triple(255, 0, 0));
 
         fun nextStatus(): Status {
-            return if(this.ordinal < values().lastIndex) {
-                values()[this.ordinal + 1]
-            } else {
-                values()[0]
-            }
+            return if(this.ordinal < values().lastIndex) values()[this.ordinal + 1] else values()[0]
         }
     }
 
