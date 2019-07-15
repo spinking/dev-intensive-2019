@@ -87,11 +87,11 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
     private fun validationAnswer(): String {
         return when(question) {
-            Question.NAME -> "Имя должно начинаться с заглавной буквы\nКак меня зовут?"
-            Question.PROFESSION -> "Профессия должна начинаться со строчной буквы\nНазови мою профессию?"
-            Question.MATERIAL -> "Материал не должен содержать цифр\nИз чего я сделан?"
-            Question.BDAY -> "Год моего рождения должен содержать только цифры\nКогда меня создали?"
-            Question.SERIAL -> "Серийный номер содержит только цифры, и их 7\nМой серийный номер?"
+            Question.NAME -> "Имя должно начинаться с заглавной буквы\n${question.question}"
+            Question.PROFESSION -> "Профессия должна начинаться со строчной буквы\n${question.question}"
+            Question.MATERIAL -> "Материал не должен содержать цифр\n${question.question}"
+            Question.BDAY -> "Год моего рождения должен содержать только цифры\n${question.question}"
+            Question.SERIAL -> "Серийный номер содержит только цифры, и их 7\n${question.question}"
             else -> "На этом все, вопросов больше нет"
         }
     }
