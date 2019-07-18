@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive
 
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -188,6 +189,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         messageEt.setText("")
         val (r, g, b) = color
         benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+        sendBtn.setColorFilter(Color.rgb(r, g, b))
         textTxt.text = phrase
     }
 }
