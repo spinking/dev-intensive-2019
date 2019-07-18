@@ -18,7 +18,7 @@ import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 
 import studio.eyesthetics.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEditorActionListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var benderImage: ImageView
     lateinit var textTxt: TextView
     lateinit var messageEt: EditText
@@ -61,7 +61,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
 
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
-        messageEt.setOnEditorActionListener(this)
+
+        messageEt.setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            doIt() }
+        false
+        }
     }
 
     /**
@@ -176,12 +181,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
             doIt()
             if(isKeyboardOpen()) hideKeyboard()
         }
-    }
-
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-
-        if(actionId == EditorInfo.IME_ACTION_DONE) doIt()
-        return false
     }
 
     private fun doIt() {
