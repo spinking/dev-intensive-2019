@@ -8,6 +8,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -20,11 +22,11 @@ import studio.eyesthetics.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.AnimatorUpdateListener {
     private lateinit var benderImage: ImageView
+    private lateinit var mEnlargeAnimation: Animation
     lateinit var textTxt: TextView
     lateinit var messageEt: EditText
     lateinit var sendBtn: ImageView
     lateinit var benderObj: Bender
-
 
 /**
     * Вызывается при первом создании или перезапуске Activity
@@ -67,6 +69,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
             doIt() }
         false
         }
+
+        mEnlargeAnimation = AnimationUtils.loadAnimation(this, R.anim.enlarge)
     }
 
     /**
@@ -129,6 +133,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
 
     override fun onPause() {
         super.onPause()
+        benderImage.clearAnimation()
         Log.d("M_MainActivity", "onPause")
     }
 
@@ -188,6 +193,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
         val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
         val (r, g, b) = color
+        benderImage.startAnimation(mEnlargeAnimation)
         animate(Color.rgb(prevColor.first, prevColor.second, prevColor.third), Color.rgb(r, g, b))
         textTxt.text = phrase
     }
