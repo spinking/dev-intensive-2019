@@ -3,18 +3,15 @@ package ru.skillbranch.devintensive
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.extensions.isKeyboardOpen
@@ -22,7 +19,7 @@ import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 import studio.eyesthetics.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.AnimatorUpdateListener {
-    lateinit var benderImage: ImageView
+    private lateinit var benderImage: ImageView
     lateinit var textTxt: TextView
     lateinit var messageEt: EditText
     lateinit var sendBtn: ImageView
@@ -191,21 +188,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
         val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
         val (r, g, b) = color
-        //benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         animate(Color.rgb(prevColor.first, prevColor.second, prevColor.third), Color.rgb(r, g, b))
-        //sendBtn.setColorFilter(Color.rgb(r, g, b))
         textTxt.text = phrase
     }
 
     private fun animate(color1: Int, color2: Int) {
         val bgAnim = ValueAnimator.ofObject(ArgbEvaluator(), color1, color2)
-        bgAnim.setDuration(600)
+        bgAnim.duration = 600
         bgAnim.addUpdateListener(this)
         bgAnim.start()
     }
 
     override fun onAnimationUpdate(animation: ValueAnimator?) {
         benderImage.setColorFilter(animation?.animatedValue as Int, PorterDuff.Mode.MULTIPLY)
-        sendBtn.setColorFilter(animation?.animatedValue as Int)
+        sendBtn.setColorFilter(animation.animatedValue as Int)
     }
 }
