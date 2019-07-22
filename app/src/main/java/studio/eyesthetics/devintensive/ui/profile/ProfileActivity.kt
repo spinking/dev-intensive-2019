@@ -14,13 +14,13 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 
 import studio.eyesthetics.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.AnimatorUpdateListener {
+class ProfileActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.AnimatorUpdateListener {
     private lateinit var benderImage: ImageView
     private lateinit var mEnlargeAnimation: Animation
     lateinit var textTxt: TextView
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_profile)
 
 
         benderImage = iv_bender
