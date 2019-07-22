@@ -20,13 +20,7 @@ import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 
 import studio.eyesthetics.devintensive.models.Bender
 
-class ProfileActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.AnimatorUpdateListener {
-    private lateinit var benderImage: ImageView
-    private lateinit var mEnlargeAnimation: Animation
-    lateinit var textTxt: TextView
-    lateinit var messageEt: EditText
-    lateinit var sendBtn: ImageView
-    lateinit var benderObj: Bender
+class ProfileActivity : AppCompatActivity() {
 
 /**
     * Вызывается при первом создании или перезапуске Activity
@@ -46,31 +40,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-
-        benderImage = iv_bender
-        textTxt = tv_text
-        messageEt = et_message
-        sendBtn = iv_send
-
-        val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
-        val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
-
-        benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
-
-        Log.d("M_MainActivity", "onCreate")
-        val (r, g, b) = benderObj.status.color
-        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
-
-        textTxt.text = benderObj.askQuestion()
-        sendBtn.setOnClickListener(this)
-
-        messageEt.setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            doIt() }
-        false
-        }
-
-        mEnlargeAnimation = AnimationUtils.loadAnimation(this, R.anim.enlarge)
     }
 
     /**
@@ -133,8 +102,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.
 
     override fun onPause() {
         super.onPause()
-        benderImage.clearAnimation()
-        Log.d("M_MainActivity", "onPause")
     }
 
     /**
@@ -175,38 +142,5 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-
-        outState?.putString("STATUS", benderObj.status.name)
-        outState?.putString("QUESTION", benderObj.question.name)
-        Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
-    }
-
-    override fun onClick(v: View?) {
-        if(v?.id == R.id.iv_send) {
-            doIt()
-            if(isKeyboardOpen()) hideKeyboard()
-        }
-    }
-
-    private fun doIt() {
-        val prevColor = benderObj.status.color
-        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
-        messageEt.setText("")
-        val (r, g, b) = color
-        benderImage.startAnimation(mEnlargeAnimation)
-        animate(Color.rgb(prevColor.first, prevColor.second, prevColor.third), Color.rgb(r, g, b))
-        textTxt.text = phrase
-    }
-
-    private fun animate(color1: Int, color2: Int) {
-        val bgAnim = ValueAnimator.ofObject(ArgbEvaluator(), color1, color2)
-        bgAnim.duration = 600
-        bgAnim.addUpdateListener(this)
-        bgAnim.start()
-    }
-
-    override fun onAnimationUpdate(animation: ValueAnimator?) {
-        benderImage.setColorFilter(animation?.animatedValue as Int, PorterDuff.Mode.MULTIPLY)
-        sendBtn.setColorFilter(animation.animatedValue as Int)
     }
 }

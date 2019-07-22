@@ -13,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-            <ImageView
+            <studio.eyesthetics.devintensive.ui.custom.AspectRatioImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/profile_bg"
                 android:scaleType="centerCrop"
+                app:aspectRatio="1.78"
                 />
 
     </FrameLayout>
