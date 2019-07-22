@@ -2,6 +2,7 @@
 <resources>
     <!-- font sizes -->
     <dimen name="font_large_24">24sp</dimen>
+    <dimen name="font_large_20">20sp</dimen>
     <dimen name="font_normal_16">16sp</dimen>
     <dimen name="font_small_12">12sp</dimen>
 
@@ -14,5 +15,8 @@
 
     <!-- spacing for send button -->
     <dimen name="send_button_size_24">24dp</dimen>
+    <dimen name="btn_round_size_40">40dp</dimen>
+    <dimen name="avatar_round_size">112dp</dimen>
+    <dimen name="space_maximum_72">72dp</dimen>
 
 </resources>
