@@ -2,6 +2,7 @@ package studio.eyesthetics.devintensive.repositories
 
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatDelegate
 import studio.eyesthetics.devintensive.App
 import studio.eyesthetics.devintensive.models.Profile
 
@@ -16,6 +17,7 @@ object PreferencesRepository {
     private const val REPOSITORY = "REPOSITORY"
     private const val RATING = "RATING"
     private const val RESPECT = "RESPECT"
+    private const val APP_THEME = "APP_THEME"
 
 
     private val prefs: SharedPreferences by lazy {
@@ -23,13 +25,11 @@ object PreferencesRepository {
         PreferenceManager.getDefaultSharedPreferences(ctx)
     }
 
-    fun getProfileData() : Profile? {
-        TODO("not implemented")
+    fun saveAppTheme(theme: Int) {
+        putValue(APP_THEME to theme)
     }
 
-    fun saveProfileData(profile: Profile) {
-        TODO("not implemented")
-    }
+    fun getAppTheme() : Int = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
     fun getProfile(): Profile? = Profile(
         prefs.getString(FIRST_NAME, "")!!,

@@ -2,6 +2,8 @@ package studio.eyesthetics.devintensive
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
+import studio.eyesthetics.devintensive.repositories.PreferencesRepository
 
 /**
  * Created by BashkatovSM on 23.07.2019
@@ -21,5 +23,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        PreferencesRepository.getAppTheme().also {
+            AppCompatDelegate.setDefaultNightMode(it)
+        }
     }
 }

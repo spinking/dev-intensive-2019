@@ -3,4 +3,8 @@
     <declare-styleable name="AspectRatioImageView">
         <attr name="aspectRatio" format="float"/>
     </declare-styleable>
+
+    <attr name="colorAccentedSurface" format="reference"/>
+    <attr name="colorDivider" format="reference"/>
+    <attr name="colorIcon" format="reference"/>
 </resources>
