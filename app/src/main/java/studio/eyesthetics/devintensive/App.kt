@@ -1,9 +1,9 @@
-package studio.eyesthetics.devintensive
+package ru.skillbranch.devintensive
 
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import studio.eyesthetics.devintensive.repositories.PreferencesRepository
+import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
 /**
  * Created by BashkatovSM on 23.07.2019

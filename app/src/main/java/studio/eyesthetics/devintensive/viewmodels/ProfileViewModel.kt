@@ -1,12 +1,12 @@
-package studio.eyesthetics.devintensive.viewmodels
+package ru.skillbranch.devintensive.viewmodels
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import studio.eyesthetics.devintensive.models.Profile
-import studio.eyesthetics.devintensive.repositories.PreferencesRepository
+import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
 /**
  * Created by BashkatovSM on 23.07.2019

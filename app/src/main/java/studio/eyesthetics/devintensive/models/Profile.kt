@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.models
+package ru.skillbranch.devintensive.models
 
 /**
  * Created by BashkatovSM on 23.07.2019
