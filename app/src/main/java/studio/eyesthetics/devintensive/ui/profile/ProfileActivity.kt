@@ -22,20 +22,6 @@ import studio.eyesthetics.devintensive.models.Bender
 
 class ProfileActivity : AppCompatActivity() {
 
-/**
-    * Вызывается при первом создании или перезапуске Activity
-    *
-    * Здесь задается внешний вид активности (UI) через метод setContentView().
-    * инициализируются представления
-    * представления связываются с необходимыми данными и ресурсами
-    * связываются данными со списками
-    *
-    * Этот метод также предоставляет Bundle, содержащий ранее сохранённое
-    * состояние Activity, если оно было.
-    *
-    * Всегда сопровождается вызовом onStart()
-    */
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_constraint)
