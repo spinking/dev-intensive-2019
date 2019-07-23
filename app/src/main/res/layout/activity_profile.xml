@@ -47,6 +47,7 @@
                     />
 
                 <ImageButton
+                    android:id="@+id/btn_edit"
                     android:layout_width="@dimen/btn_round_size_40"
                     android:layout_height="@dimen/btn_round_size_40"
                     android:background="@drawable/btn_round_bg"
@@ -58,7 +59,7 @@
 
                 <TextView
                     style="@style/Profile.Header.Nickname"
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_nick_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_avatar"
@@ -70,7 +71,7 @@
                     android:id="@+id/tv_rank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_name"
+                    android:layout_below="@+id/tv_nick_name"
                     android:layout_centerHorizontal="true"
                     android:text="Junior Android Developer"
                     />
@@ -97,6 +98,7 @@
 
             <TextView
                 style="@style/Profile.Metrics.Value"
+                android:id="@+id/tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -133,6 +135,7 @@
 
             <TextView
                 style="@style/Profile.Metrics.Value"
+                android:id="@+id/tv_respect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -288,6 +291,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
+            android:id="@+id/ic_eye"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_eye_24dp"
