@@ -543,6 +543,12 @@ class ExampleUnitTest {
         assertEquals("Bender Bending...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(15))
         assertEquals("1", "1     ".truncate(3))
     }
+
+    @Test
+    fun test_transliteration_profile() {
+        val profile = Profile("Женя", "Стереотипов", "about", "repa")
+        assertEquals("Zhenya_Stereotipov" ,profile.nickName)
+    }
 }
 
 
