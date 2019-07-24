@@ -18,20 +18,18 @@ fun String.validUrl(): Boolean {
     var username = this.substringAfterLast("/").toLowerCase()
 
     fun validAddress(address: String) : Boolean {
-        val validAddresses = listOf(
+        val protocols = listOf(
             "https://www.github.com",
             "https://github.com",
             "www.github.com",
             "github.com"
         )
-        return when {
-            validAddresses.any{ it == address} -> true
-            else -> false
-        }
+        return  protocols.any { it == address }
     }
 
     fun validUserName(username: String) : Boolean {
-        val invalidNames = listOf(
+        val excludePath = listOf(
+            "",
             "enterprise",
             "features",
             "topics",
@@ -46,19 +44,9 @@ fun String.validUrl(): Boolean {
             "login",
             "join")
 
-        return when {
-            invalidNames.any{ it == username} -> false
-            username.startsWith(" ") -> false
-            username.contains(Regex("[^a-zA-Z0-9-]")) -> false
-            username.startsWith("-") || username.endsWith("-") -> false
-            else -> true
-        }
+        return !(excludePath.any{ it == username} || username.contains(Regex("[^\\w]")))
     }
     if (username == address) username = ""
 
-    return when {
-        this == "" -> true
-        validAddress(address) && validUserName(username) -> true
-        else -> false
-    }
+    return this == "" || (validAddress(address) && validUserName(username))
 }
