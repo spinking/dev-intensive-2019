@@ -88,18 +88,18 @@ class ProfileActivity : AppCompatActivity() {
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
-        et_repository.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(text: CharSequence, p1: Int, p2: Int, p3: Int) {
-                val fullAddress = text.toString()
-                if (fullAddress.validUrl()) {
+        et_repository.addTextChangedListener(object: TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val urlAddress = s.toString()
+                if (urlAddress.validUrl()) {
                     wr_repository.error = null
                     wr_repository.isErrorEnabled = false
                 } else {
                     wr_repository.error = "Невалидный адрес репозитория"
                 }
             }
-            override fun afterTextChanged(p0: Editable?) {}
-            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         })
 
 
