@@ -18,11 +18,41 @@ fun String.validUrl(): Boolean {
     var username = this.substringAfterLast("/").toLowerCase()
 
     fun validAddress(address: String) : Boolean {
-        return true
+        val validAddresses = listOf(
+            "https://www.github.com",
+            "https://github.com",
+            "www.github.com",
+            "github.com"
+        )
+        return when {
+            validAddresses.any{ it == address} -> true
+            else -> false
+        }
     }
 
     fun validUserName(username: String) : Boolean {
-        return true
+        val invalidNames = listOf(
+            "enterprise",
+            "features",
+            "topics",
+            "collections",
+            "trending",
+            "events",
+            "marketplace",
+            "pricing",
+            "nonprofit",
+            "customer-stories",
+            "security",
+            "login",
+            "join")
+
+        return when {
+            invalidNames.any{ it == username} -> false
+            username.startsWith(" ") -> false
+            username.contains(Regex("[^a-zA-Z0-9-]")) -> false
+            username.startsWith("-") || username.endsWith("-") -> false
+            else -> true
+        }
     }
     if (username == address) username = ""
 

@@ -552,18 +552,18 @@ class ExampleUnitTest {
 
     @Test
     fun test_valid_url() {
-        assertEquals("https://github.com/johnDoe", "https://github.com/johnDoe".validUrl())
-        assertEquals("https://www.github.com/johnDoe", "https://www.github.com/johnDoe".validUrl())
-        assertEquals("github.com/johnDoe", "github.com/johnDoe".validUrl())
+        assertEquals(true, "https://github.com/johnDoe".validUrl())
+        assertEquals(true, "https://www.github.com/johnDoe".validUrl())
+        assertEquals(true, "github.com/johnDoe".validUrl())
 
-        assertEquals("https://anyDomain.github.com/johnDoe", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/johnDoe/tree", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/johnDoe/tree/something", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/enterprise", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/pricing", "Невалидный адрес репозитория".validUrl())
-        assertEquals("https://github.com/join", "Невалидный адрес репозитория".validUrl())
+        assertEquals(false, "https://anyDomain.github.com/johnDoe".validUrl())
+        assertEquals(false, "https://github.com/".validUrl())
+        assertEquals(false, "https://github.com".validUrl())
+        assertEquals(false, "https://github.com/johnDoe/tree".validUrl())
+        assertEquals(false, "https://github.com/johnDoe/tree/something".validUrl())
+        assertEquals(false, "https://github.com/enterprise".validUrl())
+        assertEquals(false, "https://github.com/pricing".validUrl())
+        assertEquals(false, "https://github.com/join".validUrl())
     }
 }
 
