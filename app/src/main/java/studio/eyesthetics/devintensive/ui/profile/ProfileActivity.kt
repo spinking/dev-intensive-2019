@@ -4,6 +4,8 @@ import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
+import ru.skillbranch.devintensive.extensions.validUrl
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
@@ -84,6 +87,21 @@ class ProfileActivity : AppCompatActivity() {
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
+
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(text: CharSequence, p1: Int, p2: Int, p3: Int) {
+                val fullAddress = text.toString()
+                if (fullAddress.validUrl()) {
+                    wr_repository.error = null
+                    wr_repository.isErrorEnabled = false
+                } else {
+                    wr_repository.error = "Невалидный адрес репозитория"
+                }
+            }
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
 
         btn_edit.setOnClickListener {
             if(isEditMode) saveProfileInfo()
