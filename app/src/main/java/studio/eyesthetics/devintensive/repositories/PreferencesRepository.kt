@@ -1,10 +1,14 @@
 package ru.skillbranch.devintensive.repositories
 
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
+import com.amulyakhare.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.App
+import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 
 /**
  * Created by BashkatovSM on 23.07.2019
@@ -63,5 +67,26 @@ object PreferencesRepository {
             is Float -> putFloat(key, value)
             else -> error("Only primitives types can be stored in Shared Preferences")
         }
+        apply()
+    }
+
+    fun getInitials(): Pair<String, String> {
+        return prefs.getString(FIRST_NAME, "") to prefs.getString(LAST_NAME, "")
+    }
+
+    fun getTextInitials(initials: Pair<String, String>): Drawable {
+        val data = Utils.toInitials(initials.first, initials.second)
+        return textDrawable(data!!)
+    }
+
+
+    private fun textDrawable(initials: String): Drawable {
+        return TextDrawable
+            .builder()
+            .beginConfig()
+            .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
+            .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
+            .endConfig()
+            .buildRound(initials, R.attr.colorAccent)
     }
 }

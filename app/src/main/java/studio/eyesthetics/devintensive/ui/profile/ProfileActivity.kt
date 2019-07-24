@@ -30,19 +30,12 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO set custom Theme this before super and setContentView
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
         Log.d("M_ProfileActivity", "onCreate")
-        /*et_repository.addTextChangedListener(object : TextValidator(et_repository) {
-            override fun validate(textView: TextView, text: String) {
-                text
-            }
-        })*/
-
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -54,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer{updateUI(it)})
         viewModel.getTheme().observe(this, Observer{updateTheme(it)})
+        viewModel.getTextInitials().observe(this, Observer { iv_avatar.setImageDrawable(it) })
     }
 
     private fun updateTheme(mode: Int) {
@@ -107,6 +101,7 @@ class ProfileActivity : AppCompatActivity() {
             if(isEditMode) saveProfileInfo()
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
+            viewModel.updateTextInitials()
          }
 
     }
