@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
+
+
 class ProfileActivity : AppCompatActivity() {
     companion object {
         const val IS_EDIT_MODE = "IS_EDIT_MODE"
@@ -32,6 +34,11 @@ class ProfileActivity : AppCompatActivity() {
         initViews(savedInstanceState)
         initViewModel()
         Log.d("M_ProfileActivity", "onCreate")
+        /*et_repository.addTextChangedListener(object : TextValidator(et_repository) {
+            override fun validate(textView: TextView, text: String) {
+                text
+            }
+        })*/
 
     }
 

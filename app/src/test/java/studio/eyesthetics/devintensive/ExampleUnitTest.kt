@@ -549,6 +549,22 @@ class ExampleUnitTest {
         val profile = Profile("Женя", "Стереотипов", "about", "repa")
         assertEquals("Zhenya_Stereotipov" ,profile.nickName)
     }
+
+    @Test
+    fun test_valid_url() {
+        assertEquals("https://github.com/johnDoe", "https://github.com/johnDoe".validUrl())
+        assertEquals("https://www.github.com/johnDoe", "https://www.github.com/johnDoe".validUrl())
+        assertEquals("github.com/johnDoe", "github.com/johnDoe".validUrl())
+
+        assertEquals("https://anyDomain.github.com/johnDoe", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/johnDoe/tree", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/johnDoe/tree/something", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/enterprise", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/pricing", "Невалидный адрес репозитория".validUrl())
+        assertEquals("https://github.com/join", "Невалидный адрес репозитория".validUrl())
+    }
 }
 
 
