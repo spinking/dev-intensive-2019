@@ -57,4 +57,8 @@
         <item name="android:minHeight">@dimen/space_maximum_72</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/ic_splash</item>
+    </style>
+
 </resources>
