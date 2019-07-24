@@ -46,6 +46,7 @@ fun String.validUrl(): Boolean {
 
         return !(excludePath.any{ it == username} || username.contains(Regex("[^\\w]")))
     }
+
     if (username == address) username = ""
 
     return this == "" || (validAddress(address) && validUserName(username))
