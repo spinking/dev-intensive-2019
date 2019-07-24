@@ -14,5 +14,21 @@ fun String.stripHtml(): String {
 }
 
 fun String.validUrl(): Boolean {
-    return true
+    val address = this.substringBeforeLast("/").toLowerCase()
+    var username = this.substringAfterLast("/").toLowerCase()
+
+    fun validAddress(address: String) : Boolean {
+        return true
+    }
+
+    fun validUserName(username: String) : Boolean {
+        return true
+    }
+    if (username == address) username = ""
+
+    return when {
+        this == "" -> true
+        validAddress(address) && validUserName(username) -> true
+        else -> false
+    }
 }
