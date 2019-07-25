@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.amulyakhare.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.spToPixels
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.utils.Utils
 
@@ -22,7 +23,6 @@ object PreferencesRepository {
     private const val RATING = "RATING"
     private const val RESPECT = "RESPECT"
     private const val APP_THEME = "APP_THEME"
-
 
     private val prefs: SharedPreferences by lazy {
         val ctx = App.applicationContext()
@@ -79,11 +79,13 @@ object PreferencesRepository {
     }
 
     private fun textDrawable(initials: String): Drawable {
+        val fontSize =
         return TextDrawable
             .builder()
             .beginConfig()
             .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
             .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
+            .fontSize(48.spToPixels)
             .endConfig()
             .buildRound(initials, R.attr.colorAccent)
     }
