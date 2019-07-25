@@ -84,8 +84,7 @@ class ProfileActivity : AppCompatActivity() {
 
         et_repository.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val urlAddress = s.toString()
-                if (urlAddress.validUrl()) {
+                if (s.toString().validUrl()) {
                     wr_repository.error = null
                     wr_repository.isErrorEnabled = false
                 } else {
