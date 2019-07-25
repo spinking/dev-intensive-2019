@@ -16,16 +16,14 @@ fun String.stripHtml(): String {
 fun String.validUrl(): Boolean {
     val address = this.substringBeforeLast("/").toLowerCase()
     var username = this.substringAfterLast("/").toLowerCase()
+    if (username == address) username = ""
 
-    fun validAddress(address: String) : Boolean {
-        val protocols = listOf(
+    fun validAddress(address: String) : Boolean =  listOf(
             "https://www.github.com",
             "https://github.com",
             "www.github.com",
             "github.com"
-        )
-        return  protocols.any { it == address }
-    }
+        ).any { it == address }
 
     fun validUserName(username: String) : Boolean {
         val excludePath = listOf(
@@ -46,8 +44,6 @@ fun String.validUrl(): Boolean {
 
         return !(excludePath.any{ it == username} || username.contains(Regex("[^\\w]")))
     }
-
-    if (username == address) username = ""
 
     return this == "" || (validAddress(address) && validUserName(username))
 }
