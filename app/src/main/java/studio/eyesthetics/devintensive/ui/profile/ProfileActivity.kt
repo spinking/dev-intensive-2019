@@ -60,7 +60,6 @@ class ProfileActivity : AppCompatActivity() {
             for ((k, v) in viewFields) {
                 v.text = it[k].toString()
             }
-
             btn_switch_theme.setOnClickListener{
                 viewModel.switchTheme()
             }

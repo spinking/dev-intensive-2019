@@ -52,6 +52,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun updateTextInitials() {
+        Log.d("M_ProfileViewModel", "Update Initials")
         val initials = repository.getInitials()
         if (initials.first.isNotEmpty() || initials.second.isNotEmpty()) {
             initialsDrawable.value = repository.getTextInitials(initials)
