@@ -75,8 +75,7 @@ object PreferencesRepository {
     }
 
     fun getTextInitials(initials: Pair<String, String>): Drawable {
-        val data = Utils.toInitials(initials.first, initials.second)
-        return textDrawable(data!!)
+        return textDrawable(Utils.toInitials(initials.first, initials.second)!!)
     }
 
 
