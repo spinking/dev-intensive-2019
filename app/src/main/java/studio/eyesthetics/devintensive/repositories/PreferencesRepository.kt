@@ -79,7 +79,6 @@ object PreferencesRepository {
     }
 
     private fun textDrawable(initials: String): Drawable {
-        val fontSize =
         return TextDrawable
             .builder()
             .beginConfig()
