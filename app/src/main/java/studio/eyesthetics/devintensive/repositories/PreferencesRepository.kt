@@ -78,7 +78,6 @@ object PreferencesRepository {
         return textDrawable(Utils.toInitials(initials.first, initials.second)!!)
     }
 
-
     private fun textDrawable(initials: String): Drawable {
         return TextDrawable
             .builder()
