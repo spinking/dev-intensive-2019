@@ -4,11 +4,11 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
-import com.amulyakhare.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.spToPixels
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 
 /**
