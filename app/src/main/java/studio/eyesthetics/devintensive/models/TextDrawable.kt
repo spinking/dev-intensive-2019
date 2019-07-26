@@ -6,7 +6,6 @@ import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RectShape
 import android.graphics.drawable.shapes.RoundRectShape
 
-
 class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) {
 
      private val textPaint: Paint
