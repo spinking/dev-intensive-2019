@@ -23,10 +23,12 @@ import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 class ProfileActivity : AppCompatActivity() {
     companion object {
         const val IS_EDIT_MODE = "IS_EDIT_MODE"
+        const val IS_VALID_REPO = "IS_VALID_REPO"
     }
 
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
+    var isValidRepo = true
     lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE, isEditMode)
+        outState?.putBoolean(IS_VALID_REPO, isValidRepo)
     }
 
     private fun initViewModel() {
@@ -79,14 +82,17 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        isValidRepo = savedInstanceState?.getBoolean(IS_VALID_REPO, false) ?: false
         showCurrentMode(isEditMode)
 
         et_repository.addTextChangedListener(object: TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.toString().validUrl()) {
+                    isValidRepo = true
                     wr_repository.error = null
                     wr_repository.isErrorEnabled = false
                 } else {
+                    isValidRepo = false
                     wr_repository.error = "Невалидный адрес репозитория"
                 }
             }
@@ -96,10 +102,12 @@ class ProfileActivity : AppCompatActivity() {
 
 
         btn_edit.setOnClickListener {
-            if(isEditMode) saveProfileInfo()
-            isEditMode = !isEditMode
-            showCurrentMode(isEditMode)
-            viewModel.updateTextInitials()
+            if(isValidRepo) {
+                if(isEditMode) saveProfileInfo()
+                isEditMode = !isEditMode
+                showCurrentMode(isEditMode)
+                viewModel.updateTextInitials()
+            }
          }
 
     }
