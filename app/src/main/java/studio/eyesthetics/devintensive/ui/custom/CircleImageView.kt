@@ -44,7 +44,7 @@ class CircleImageView @JvmOverloads constructor(
         borderWidth = dp
     }
 
-    fun getBorderColor(): Int = borderColor
+    fun getBorderColor(): Int = 4
 
     fun setBorderColor(hex: String) {
         val color = Color.parseColor(hex)
