@@ -1,15 +1,22 @@
 package ru.skillbranch.devintensive.repositories
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.preference.PreferenceManager
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.toColor
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.spToPixels
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
+import kotlin.coroutines.coroutineContext
 
 /**
  * Created by BashkatovSM on 23.07.2019
@@ -33,7 +40,7 @@ object PreferencesRepository {
         putValue(APP_THEME to theme)
     }
 
-    fun getAppTheme() : Int = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
+    fun getAppTheme(): Int = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
     fun getProfile(): Profile = Profile(
         prefs.getString(FIRST_NAME, "")!!,
@@ -59,7 +66,7 @@ object PreferencesRepository {
         val key = pair.first
         val value = pair.second
 
-        when(value) {
+        when (value) {
             is String -> putString(key, value)
             is Int -> putInt(key, value)
             is Boolean -> putBoolean(key, value)
@@ -86,6 +93,12 @@ object PreferencesRepository {
             .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
             .fontSize(48.spToPixels)
             .endConfig()
-            .buildRound(initials, if(getAppTheme() == 1) R.color.color_accent_night else R.color.color_accent)
+            .buildRound(
+                initials,
+                if (getAppTheme() == 2) ContextCompat.getColor(
+                    App.applicationContext(),
+                    R.color.color_accent_night
+                ) else ContextCompat.getColor(App.applicationContext(), R.color.color_accent)
+            )
     }
 }
