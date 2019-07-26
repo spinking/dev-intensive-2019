@@ -9,16 +9,16 @@ import android.graphics.drawable.shapes.RoundRectShape
 
 class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) {
 
-     val textPaint: Paint
-     val borderPaint: Paint
-     val text: String?
-     val color: Int
-     val shape: RectShape?
-     val height: Int
-     val width: Int
-     val fontSize: Int
-     val radius: Float
-     val borderThickness: Int
+     private val textPaint: Paint
+     private val borderPaint: Paint
+     private val text: String?
+     private val color: Int
+     private val shape: RectShape?
+     private val height: Int
+     private val width: Int
+     private val fontSize: Int
+     private val radius: Float
+     private val borderThickness: Int
 
     init {
 
