@@ -86,6 +86,6 @@ object PreferencesRepository {
             .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
             .fontSize(48.spToPixels)
             .endConfig()
-            .buildRound(initials, R.attr.colorAccent)
+            .buildRound(initials, if(getAppTheme() == 1) R.color.color_accent_night else R.color.color_accent)
     }
 }

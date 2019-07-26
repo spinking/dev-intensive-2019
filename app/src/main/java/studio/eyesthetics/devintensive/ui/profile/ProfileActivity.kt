@@ -65,6 +65,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             btn_switch_theme.setOnClickListener{
                 viewModel.switchTheme()
+                viewModel.updateTextInitials()
             }
         }
     }
