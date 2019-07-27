@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.graphics.toColor
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -130,15 +131,18 @@ class ProfileActivity : AppCompatActivity() {
             val filter: ColorFilter? = if(isEdit) {
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
-                    PorterDuffColorFilter(
-                        resources.getColor(R.color.color_accent, theme),
-                        PorterDuff.Mode.SRC_IN
-                        )
+
+                    when(viewModel.getTheme().value) {
+                        2 -> PorterDuffColorFilter(resources.getColor(R.color.color_accent_night, theme), PorterDuff.Mode.SRC_IN)
+                        else -> PorterDuffColorFilter(resources.getColor(R.color.color_accent, theme), PorterDuff.Mode.SRC_IN)
+                    }
+
                 } else{
-                    PorterDuffColorFilter(
-                        resources.getColor(R.color.color_accent),
-                        PorterDuff.Mode.SRC_IN
-                        )
+
+                    when(viewModel.getTheme().value) {
+                        2 -> PorterDuffColorFilter(resources.getColor(R.color.color_accent_night), PorterDuff.Mode.SRC_IN)
+                        else -> PorterDuffColorFilter(resources.getColor(R.color.color_accent), PorterDuff.Mode.SRC_IN)
+                    }
                 }
             } else {
                 null
