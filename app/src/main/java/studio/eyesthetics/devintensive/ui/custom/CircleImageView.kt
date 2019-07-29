@@ -10,6 +10,7 @@ import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.dpToPixels
 
 /**
  * Created by BashkatovSM on 22.07.2019
@@ -21,7 +22,7 @@ class CircleImageView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val DEFAULT_BORDER_WIDTH = 2
+        private val DEFAULT_BORDER_WIDTH = 2.dpToPixels
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
