@@ -25,11 +25,13 @@ class ProfileActivity : AppCompatActivity() {
     companion object {
         const val IS_EDIT_MODE = "IS_EDIT_MODE"
         const val IS_VALID_REPO = "IS_VALID_REPO"
+        const val THEME_VALUE = "THEME_VALUE"
     }
 
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     var isValidRepo = true
+    var themeValue = 1
     lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE, isEditMode)
         outState?.putBoolean(IS_VALID_REPO, isValidRepo)
+        outState?.putInt(THEME_VALUE, themeValue)
     }
 
     private fun initViewModel() {
@@ -85,6 +88,7 @@ class ProfileActivity : AppCompatActivity() {
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         isValidRepo = savedInstanceState?.getBoolean(IS_VALID_REPO, false) ?: false
+        themeValue = savedInstanceState?.getInt(THEME_VALUE, 1) ?: 1
         showCurrentMode(isEditMode)
 
         et_repository.addTextChangedListener(object: TextWatcher {
@@ -132,14 +136,16 @@ class ProfileActivity : AppCompatActivity() {
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
 
-                    when(viewModel.getTheme().value) {
+                    when(themeValue) {
                         2 -> PorterDuffColorFilter(resources.getColor(R.color.color_accent_night, theme), PorterDuff.Mode.SRC_IN)
                         else -> PorterDuffColorFilter(resources.getColor(R.color.color_accent, theme), PorterDuff.Mode.SRC_IN)
                     }
 
                 } else{
 
-                    when(viewModel.getTheme().value) {
+                    //PorterDuffColorFilter(resources.getColor(R.color.color_accent), PorterDuff.Mode.SRC_IN)
+
+                    when(themeValue) {
                         2 -> PorterDuffColorFilter(resources.getColor(R.color.color_accent_night), PorterDuff.Mode.SRC_IN)
                         else -> PorterDuffColorFilter(resources.getColor(R.color.color_accent), PorterDuff.Mode.SRC_IN)
                     }
