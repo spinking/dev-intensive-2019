@@ -14,36 +14,24 @@ fun String.stripHtml(): String {
 }
 
 fun String.validUrl(): Boolean {
-    val address = this.substringBeforeLast("/").toLowerCase()
-    var username = this.substringAfterLast("/").toLowerCase()
-    if (username == address) username = ""
 
-    fun validAddress(address: String) : Boolean =  listOf(
-            "https://www.github.com",
-            "https://github.com",
-            "www.github.com",
-            "github.com"
-        ).any { it == address }
+    val exceptions = arrayOf(
+        "enterprise",
+        "features",
+        "topics",
+        "collections",
+        "trending",
+        "events",
+        "marketplace",
+        "pricing",
+        "nonprofit",
+        "customer-stories",
+        "security",
+        "login",
+        "join"
+    ).joinToString( "|\\b", "\\b" )
 
-    fun validUserName(username: String) : Boolean {
-        val excludePath = listOf(
-            "",
-            "enterprise",
-            "features",
-            "topics",
-            "collections",
-            "trending",
-            "events",
-            "marketplace",
-            "pricing",
-            "nonprofit",
-            "customer-stories",
-            "security",
-            "login",
-            "join")
+    val regex = Regex("^(?:https://)?(?:www.)?(?:github.com/)[^/|\\s]+((?:$exceptions)|(?<!$exceptions))(?:/)?$")
 
-        return !(excludePath.any{ it == username} || username.contains(Regex("[^\\w]")))
-    }
-
-    return this == "" || (validAddress(address) && validUserName(username))
+    return (this.isBlank() || regex.matches(this))
 }
