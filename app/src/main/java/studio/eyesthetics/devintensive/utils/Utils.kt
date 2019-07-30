@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
 import android.content.Context
+import android.util.Log
 import android.util.TypedValue
 
 
@@ -19,13 +20,13 @@ object Utils {
 
         var lastName = parts?.getOrNull(1)
 
-        if (firstName == "") firstName = null
-        if (lastName == "") lastName = null
+        if (firstName.isNullOrBlank()) firstName = null
+        if (lastName.isNullOrBlank()) lastName = null
         return firstName to lastName
     }
 
     fun transliteration(payload: String, divider: String = " "): String {
-        val fullName: List<String> = payload.split(" ")
+        val fullName: List<String> = payload.split(" ").filter { a -> a.isNotBlank() }
         var res = ""
         for (word: String in fullName) {
             var sb = ""
@@ -103,8 +104,12 @@ object Utils {
                 }
                 sb = "$sb$char"
             }
-            if (res.isNotEmpty()) res = "$res$divider$sb"
-            else res = "$res$sb"
+            res = when {
+                res.isNotBlank() -> "$res$divider$sb"
+                else -> "$res$sb"
+            }
+            /*if (res.isNotEmpty() || (res != " ")) res = "$res$divider$sb"
+            else res = "$res$sb"*/
         }
 
         return res
