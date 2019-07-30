@@ -11,6 +11,7 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.dpToPixels
+import ru.skillbranch.devintensive.extensions.pxToDimensionPixels
 
 /**
  * Created by BashkatovSM on 22.07.2019
@@ -38,11 +39,11 @@ class CircleImageView @JvmOverloads constructor(
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
 
-    fun getBorderWidth() = borderWidth
+    fun getBorderWidth() = borderWidth.pxToDimensionPixels
 
     fun setBorderWidth(dp: Int) {
         if (dp == borderWidth) return
-        borderWidth = dp
+        borderWidth = dp.dpToPixels
     }
 
     fun getBorderColor(): Int = borderColor
