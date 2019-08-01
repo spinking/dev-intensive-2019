@@ -20,7 +20,6 @@ class ProfileViewModel : ViewModel() {
     private val initialsDrawable = MutableLiveData<Drawable>()
 
     init {
-        Log.d("M_ProfileViewModel", "init view model")
         profileData.value =repository.getProfile()
         appTheme.value = repository.getAppTheme()
         updateTextInitials()
@@ -28,7 +27,6 @@ class ProfileViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("M_ProfileViewModel", "view model cleared")
     }
 
     fun getProfileData(): LiveData<Profile> = profileData
@@ -52,7 +50,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun updateTextInitials() {
-        Log.d("M_ProfileViewModel", "Update Initials")
         val initials = repository.getInitials()
         if (initials.first.isNotEmpty() || initials.second.isNotEmpty()) {
             initialsDrawable.value = repository.getTextInitials(initials)
