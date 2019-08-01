@@ -9,6 +9,8 @@ import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.dpToPixels
 import ru.skillbranch.devintensive.extensions.pxToDimensionPixels
@@ -56,11 +58,13 @@ class CircleImageView @JvmOverloads constructor(
 
     fun setBorderColor(@ColorRes colorId: Int) {
         if(colorId == borderColor) return
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        //borderColor = ResourcesCompat.getColor(resources, colorId, context.theme)
+        borderColor = ContextCompat.getColor(App.applicationContext(), colorId)
+        /*if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             borderColor = resources.getColor(colorId, context.theme)
         } else {
             borderColor = resources.getColor(colorId)
-        }
+        }*/
     }
 
     init {
