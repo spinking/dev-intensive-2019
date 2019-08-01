@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
@@ -16,24 +17,18 @@ import ru.skillbranch.devintensive.extensions.dpToPixels
 import ru.skillbranch.devintensive.extensions.pxToDimensionPixels
 
 /**
- * Created by BashkatovSM on 22.07.2019
+ * Created by BashkatovSM on 01.08.2019
  */
 class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr){
 
     companion object {
         private val DEFAULT_BORDER_WIDTH = 2.dpToPixels
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
-
-    private val paint: Paint = Paint().apply { isAntiAlias = true }
-    private val paintBorder: Paint = Paint().apply { isAntiAlias = true }
-    private val paintBackground: Paint = Paint().apply { isAntiAlias = true }
-    private var circleCenter: Int = 0
-    private var heightCircle: Int = 0
 
     private var borderWidth: Int = DEFAULT_BORDER_WIDTH
     private var borderColor = DEFAULT_BORDER_COLOR
@@ -41,30 +36,29 @@ class CircleImageView @JvmOverloads constructor(
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
 
+    private var paintBorder: Paint = Paint().apply { isAntiAlias = true }
+    private var paint: Paint = Paint().apply { isAntiAlias = true }
+
+    private var circleCenter: Int = 0
+    private var heightCircle: Int = 0
+
+
+
     fun getBorderWidth() = borderWidth.pxToDimensionPixels
 
-    fun setBorderWidth(dp: Int) {
-        if (dp == borderWidth) return
+    fun setBorderWidth(@Dimension(unit = Dimension.DP)dp: Int) {
         borderWidth = dp.dpToPixels
     }
 
     fun getBorderColor(): Int = borderColor
 
-    fun setBorderColor(hex: String) {
-        val color = Color.parseColor(hex)
-        if(color == borderColor) return
-        borderColor = color
+    fun setBorderColor(@ColorRes colorId: Int) {
+        borderColor = ContextCompat.getColor(App.applicationContext(), colorId)
     }
 
-    fun setBorderColor(@ColorRes colorId: Int) {
-        if(colorId == borderColor) return
-        //borderColor = ResourcesCompat.getColor(resources, colorId, context.theme)
-        borderColor = ContextCompat.getColor(App.applicationContext(), colorId)
-        /*if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            borderColor = resources.getColor(colorId, context.theme)
-        } else {
-            borderColor = resources.getColor(colorId)
-        }*/
+    fun setBorderColor(hex: String) {
+        val color = Color.parseColor(hex)
+        borderColor = color
     }
 
     init {
@@ -81,53 +75,36 @@ class CircleImageView @JvmOverloads constructor(
     override fun getScaleType(): ScaleType =
         super.getScaleType().let { if (it == null || it != CENTER_INSIDE) CENTER_CROP else it }
 
-    override fun setScaleType(scaleType: ScaleType) {
-        if (scaleType != CENTER_CROP && scaleType != CENTER_INSIDE) {
-            throw IllegalArgumentException(String.format("ScaleType is not supported." , scaleType))
-        } else {
-            super.setScaleType(scaleType)
-        }
-    }
 
     override fun onDraw(canvas: Canvas) {
         loadBitmap()
 
-        if (civImage == null) return
+        if(civImage == null) return
 
         val circleCenterWithBorder = circleCenter + borderWidth
-        val margeRadius = 0f
 
-        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenterWithBorder - margeRadius, paintBorder)
-        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter - margeRadius, paintBackground)
-        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter - margeRadius, paint)
-    }
-
-    private fun update() {
-        if (civImage != null)
-            updateShader()
-
-        val usableWidth = width - (paddingLeft + paddingRight)
-        val usableHeight = height - (paddingTop + paddingBottom)
-
-        heightCircle = Math.min(usableWidth, usableHeight)
-
-        circleCenter = ((heightCircle - borderWidth * 2) / 2)
-        paintBorder.color = borderColor
-
-        invalidate()
+        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), paintBorder)
+        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter.toFloat(), paint)
     }
 
     private fun loadBitmap() {
-        if (civDrawable == drawable) return
-
         civDrawable = drawable
         civImage = drawableToBitmap(civDrawable)
         updateShader()
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        update()
+    private fun drawableToBitmap(drawable: Drawable?): Bitmap? {
+        return when(drawable) {
+            null -> null
+            is BitmapDrawable -> drawable.bitmap
+            else -> {
+                val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                drawable.setBounds(0,0,canvas.width, canvas.height)
+                drawable.draw(canvas)
+                bitmap
+            }
+        }
     }
 
     private fun updateShader() {
@@ -172,35 +149,21 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
-    private fun drawableToBitmap(drawable: Drawable?): Bitmap? =
-        when (drawable) {
-            null -> null
-            is BitmapDrawable -> drawable.bitmap
-            else -> try {
-                val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-                val canvas = Canvas(bitmap)
-                drawable.setBounds(0, 0, canvas.width, canvas.height)
-                drawable.draw(canvas)
-                bitmap
-            } catch (e: Exception) {
-                e.printStackTrace()
-                null
-            }
-        }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val width = measure(widthMeasureSpec)
-        val height = measure(heightMeasureSpec)
-        setMeasuredDimension(width, height)
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        update()
     }
 
-    private fun measure(measureSpec: Int): Int {
-        val specMode = MeasureSpec.getMode(measureSpec)
-        val specSize = MeasureSpec.getSize(measureSpec)
-        return when (specMode) {
-            MeasureSpec.EXACTLY -> specSize
-            MeasureSpec.AT_MOST -> specSize
-            else -> heightCircle
-        }
+    private fun update() {
+        if(civImage != null) updateShader()
+
+        val usableWidth = width - (paddingLeft + paddingRight)
+        val usableHeight = height - (paddingTop + paddingBottom)
+
+        heightCircle = Math.min(usableWidth, usableHeight)
+
+        circleCenter = ((heightCircle - borderWidth * 2) / 2)
+        paintBorder.color = borderColor
+        invalidate()
     }
 }
