@@ -89,10 +89,7 @@ object PreferencesRepository {
             .endConfig()
             .buildRound(
                 initials,
-                if (getAppTheme() == 2) ContextCompat.getColor(
-                    App.applicationContext(),
-                    R.color.color_accent_night
-                ) else ContextCompat.getColor(App.applicationContext(), R.color.color_accent)
+                ContextCompat.getColor(App.applicationContext(), if(getAppTheme() == 1)R.color.color_accent else R.color.color_accent_night)
             )
     }
 }
