@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.spToPixels

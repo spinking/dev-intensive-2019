@@ -1,11 +1,5 @@
 package ru.skillbranch.devintensive.utils
 
-import android.content.Context
-import android.util.Log
-import android.util.TypedValue
-
-
-
 /**
  * Created by Spinking on 27.06.2019.
  */
