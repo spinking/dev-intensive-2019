@@ -75,11 +75,11 @@ object PreferencesRepository {
         return prefs.getString(FIRST_NAME, "") to prefs.getString(LAST_NAME, "")
     }
 
-    fun getTextInitials(initials: Pair<String, String>): Drawable {
-        return textDrawable(Utils.toInitials(initials.first, initials.second)!!)
+    fun getTextInitials(initials: Pair<String, String>, colorId: Int): Drawable {
+        return textDrawable(Utils.toInitials(initials.first, initials.second)!!, colorId)
     }
 
-    private fun textDrawable(initials: String): Drawable {
+    private fun textDrawable(initials: String, colorId: Int): Drawable {
         return TextDrawable
             .builder()
             .beginConfig()
@@ -87,8 +87,6 @@ object PreferencesRepository {
             .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
             .fontSize(48.spToPixels)
             .endConfig()
-            .buildRound(
-                initials,
-                ContextCompat.getColor(App.applicationContext(), if(getAppTheme() == 1)R.color.color_accent else R.color.color_accent_night))
+            .buildRound(initials, colorId)
     }
 }

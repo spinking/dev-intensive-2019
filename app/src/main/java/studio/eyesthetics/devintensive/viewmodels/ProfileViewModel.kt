@@ -1,7 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +21,6 @@ class ProfileViewModel : ViewModel() {
     init {
         profileData.value =repository.getProfile()
         appTheme.value = repository.getAppTheme()
-        updateTextInitials()
     }
 
     override fun onCleared() {
@@ -49,10 +47,10 @@ class ProfileViewModel : ViewModel() {
         repository.saveAppTheme(appTheme.value!!)
     }
 
-    fun updateTextInitials() {
+    fun updateTextInitials(colorId: Int) {
         val initials = repository.getInitials()
         if (initials.first.isNotEmpty() || initials.second.isNotEmpty()) {
-            initialsDrawable.value = repository.getTextInitials(initials)
+            initialsDrawable.value = repository.getTextInitials(initials, colorId)
         }
     }
 }

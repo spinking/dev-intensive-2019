@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.validUrl
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
@@ -61,9 +62,9 @@ class ProfileActivity : AppCompatActivity() {
             for ((k, v) in viewFields) {
                 v.text = it[k].toString()
             }
+            viewModel.updateTextInitials(getAccentColor())
             btn_switch_theme.setOnClickListener{
                 viewModel.switchTheme()
-                viewModel.updateTextInitials()
             }
         }
     }
@@ -105,7 +106,6 @@ class ProfileActivity : AppCompatActivity() {
                 if(isEditMode) saveProfileInfo()
                 isEditMode = !isEditMode
                 showCurrentMode(isEditMode)
-                viewModel.updateTextInitials()
             }
          }
 
