@@ -9,7 +9,7 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.spToPixels
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
+import ru.skillbranch.devintensive.models.TextDrawable.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 
 /**
@@ -89,7 +89,6 @@ object PreferencesRepository {
             .endConfig()
             .buildRound(
                 initials,
-                ContextCompat.getColor(App.applicationContext(), if(getAppTheme() == 1)R.color.color_accent else R.color.color_accent_night)
-            )
+                ContextCompat.getColor(App.applicationContext(), if(getAppTheme() == 1)R.color.color_accent else R.color.color_accent_night))
     }
 }

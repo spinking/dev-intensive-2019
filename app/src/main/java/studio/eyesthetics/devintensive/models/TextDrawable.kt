@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.models.textdrawable
+package ru.skillbranch.devintensive.models.TextDrawable
 
 import android.graphics.*
 import android.graphics.drawable.ShapeDrawable
@@ -8,20 +8,17 @@ import android.graphics.drawable.shapes.RoundRectShape
 
 class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) {
 
-     private val textPaint: Paint
-     private val borderPaint: Paint
-     private val text: String?
-     private val color: Int
-     private val shape: RectShape?
-     private val height: Int
-     private val width: Int
-     private val fontSize: Int
-     private val radius: Float
-     private val borderThickness: Int
+    private val textPaint: Paint
+    private val text: String?
+    private val color: Int
+    private val shape: RectShape?
+    private val height: Int
+    private val width: Int
+    private val fontSize: Int
+    private val radius: Float
 
     init {
-
-        // shape properties
+        // Shape Properties
         shape = builder.shape
         height = builder.height
         width = builder.width
@@ -33,45 +30,23 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
 
         // text paint settings
         fontSize = builder.fontSize
-        textPaint = Paint()
-        textPaint.color = builder.textColor
-        textPaint.isAntiAlias = true
-        textPaint.isFakeBoldText = builder.isBold
-        textPaint.style = Paint.Style.FILL
-        textPaint.typeface = builder.font
-        textPaint.textAlign = Paint.Align.CENTER
-        textPaint.strokeWidth = builder.borderThickness.toFloat()
-
-        // border paint settings
-        borderThickness = builder.borderThickness
-        borderPaint = Paint()
-        borderPaint.color = getDarkerShade(color)
-        borderPaint.style = Paint.Style.STROKE
-        borderPaint.strokeWidth = borderThickness.toFloat()
-
+        textPaint = Paint().apply {
+            color = builder.textColor
+            isAntiAlias = true
+            isFakeBoldText = builder.isBold
+            style = Paint.Style.FILL
+            typeface = builder.font
+            textAlign = Paint.Align.CENTER
+        }
         // drawable paint color
         val paint = paint
         paint.color = color
 
     }
 
-    private fun getDarkerShade(color: Int): Int {
-        return Color.rgb(
-            (SHADE_FACTOR * Color.red(color)).toInt(),
-            (SHADE_FACTOR * Color.green(color)).toInt(),
-            (SHADE_FACTOR * Color.blue(color)).toInt()
-        )
-    }
-
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
         val r = bounds
-
-
-        // draw border
-        if (borderThickness > 0) {
-            drawBorder(canvas)
-        }
 
         val count = canvas.save()
         canvas.translate(r.left.toFloat(), r.top.toFloat())
@@ -87,22 +62,7 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
             height / 2 - (textPaint.descent() + textPaint.ascent()) / 2,
             textPaint
         )
-
         canvas.restoreToCount(count)
-
-    }
-
-    private fun drawBorder(canvas: Canvas) {
-        val rect = RectF(bounds)
-        rect.inset((borderThickness / 2).toFloat(), (borderThickness / 2).toFloat())
-
-        if (shape is OvalShape) {
-            canvas.drawOval(rect, borderPaint)
-        } else if (shape is RoundRectShape) {
-            canvas.drawRoundRect(rect, radius, radius, borderPaint)
-        } else {
-            canvas.drawRect(rect, borderPaint)
-        }
     }
 
     override fun setAlpha(alpha: Int) {
@@ -125,45 +85,19 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
         return height
     }
 
-    class Builder constructor() : IConfigBuilder, IShapeBuilder, IBuilder {
-
-        var text: String? = null
-
-        var color: Int = 0
-
-        var borderThickness: Int = 0
-
-        var width: Int = 0
-
-        var height: Int = 0
-
-        var font: Typeface? = null
-
-        var shape: RectShape? = null
-
-        var textColor: Int = 0
-
-        var fontSize: Int = 0
-
-        var isBold: Boolean = false
-
-        var toUpperCase: Boolean = false
-
+    class Builder(
+        var text: String? = "",
+        var color: Int = Color.GRAY,
+        var width: Int = -1,
+        var height: Int = -1,
+        var font: Typeface? = Typeface.create("sans-serif-light", Typeface.NORMAL),
+        var shape: RectShape? = RectShape(),
+        var textColor: Int = Color.WHITE,
+        var fontSize: Int = -1,
+        var isBold: Boolean = false,
+        var toUpperCase: Boolean = false,
         var radius: Float = 0.toFloat()
-
-        init {
-            text = ""
-            color = Color.GRAY
-            textColor = Color.WHITE
-            borderThickness = 0
-            width = -1
-            height = -1
-            shape = RectShape()
-            font = Typeface.create("sans-serif-light", Typeface.NORMAL)
-            fontSize = -1
-            isBold = false
-            toUpperCase = false
-        }
+    ) : IConfigBuilder, IShapeBuilder, IBuilder {
 
         override fun width(width: Int): IConfigBuilder {
             this.width = width
@@ -177,11 +111,6 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
 
         override fun textColor(color: Int): IConfigBuilder {
             this.textColor = color
-            return this
-        }
-
-        override fun withBorder(thickness: Int): IConfigBuilder {
-            this.borderThickness = thickness
             return this
         }
 
@@ -268,8 +197,6 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
 
         fun textColor(color: Int): IConfigBuilder
 
-        fun withBorder(thickness: Int): IConfigBuilder
-
         fun useFont(font: Typeface): IConfigBuilder
 
         fun fontSize(size: Int): IConfigBuilder
@@ -304,8 +231,6 @@ class TextDrawable constructor(builder: Builder) : ShapeDrawable(builder.shape) 
     }
 
     companion object {
-        private val SHADE_FACTOR = 0.9f
-
         fun builder(): IShapeBuilder {
             return Builder()
         }
