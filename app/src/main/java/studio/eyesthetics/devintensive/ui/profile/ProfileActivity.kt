@@ -27,9 +27,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: ProfileViewModel
-    var isEditMode = false
+    private var isEditMode = false
     var isValidRepo = true
-    lateinit var viewFields : Map<String, TextView>
+    private lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
