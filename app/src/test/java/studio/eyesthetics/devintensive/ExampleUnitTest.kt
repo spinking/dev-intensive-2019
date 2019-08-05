@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive
 
-import org.junit.Assert
 import org.junit.Test
 
 import org.junit.Assert.*
