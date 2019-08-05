@@ -73,9 +73,9 @@ class ExampleUnitTest {
     @Test
     fun test_copy() {
         val user = User.makeUser("John Wick")
-        var user2 = user.copy(lastVisit = Date())
-        var user3 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECOND))
-        var user4 = user.copy(lastName = "Cena", lastVisit = Date().add(2, TimeUnits.HOUR))
+        val user2 = user.copy(lastVisit = Date())
+        val user3 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECOND))
+        val user4 = user.copy(lastName = "Cena", lastVisit = Date().add(2, TimeUnits.HOUR))
 
         println("""
             ${user.lastVisit?.format()}
