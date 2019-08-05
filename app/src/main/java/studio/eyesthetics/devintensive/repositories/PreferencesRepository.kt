@@ -8,7 +8,7 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.spToPixels
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.models.TextDrawable.TextDrawable
+import ru.skillbranch.devintensive.models.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 
 /**

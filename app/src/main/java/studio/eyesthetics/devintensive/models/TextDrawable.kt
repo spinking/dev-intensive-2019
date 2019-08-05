@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.models.TextDrawable
+package ru.skillbranch.devintensive.models
 
 import android.graphics.*
 import android.graphics.drawable.ShapeDrawable
