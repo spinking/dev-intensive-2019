@@ -251,84 +251,84 @@ class ExampleUnitTest {
 
         resetDates(messageDate, currDate)
 
-        Assert.assertEquals("2 часа назад", messageDate.add(-2, TimeUnits.HOUR).humanizeDiff(currDate))
+        assertEquals("2 часа назад", messageDate.add(-2, TimeUnits.HOUR).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("52 дня назад", messageDate.add(-52, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("52 дня назад", messageDate.add(-52, TimeUnits.DAY).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("через 2 минуты", messageDate.add(2, TimeUnits.MINUTE).humanizeDiff(currDate))
+        assertEquals("через 2 минуты", messageDate.add(2, TimeUnits.MINUTE).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("через 7 дней", messageDate.add(7, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("через 7 дней", messageDate.add(7, TimeUnits.DAY).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("более года назад", messageDate.add(-400, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("более года назад", messageDate.add(-400, TimeUnits.DAY).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("более чем через год", messageDate.add(400, TimeUnits.DAY).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-
-        Assert.assertEquals("только что", messageDate.add(-1, TimeUnits.SECOND).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("несколько секунд назад", messageDate.add(-45, TimeUnits.SECOND).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("минуту назад", messageDate.add(-46, TimeUnits.SECOND).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("1 минуту назад", messageDate.add(-76, TimeUnits.SECOND).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("минуту назад", messageDate.add(-1, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("2 минуты назад", messageDate.add(-2, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("3 минуты назад", messageDate.add(-3, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("45 минут назад", messageDate.add(-45, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("час назад", messageDate.add(-1, TimeUnits.HOUR).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("1 час назад", messageDate.add(-76, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("2 часа назад", messageDate.add(-120, TimeUnits.MINUTE).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("3 часа назад", messageDate.add(-3, TimeUnits.HOUR).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("4 часа назад", messageDate.add(-4, TimeUnits.HOUR).humanizeDiff(currDate))
-
-        resetDates(messageDate, currDate)
-        Assert.assertEquals("5 часов назад", messageDate.add(-5, TimeUnits.HOUR).humanizeDiff(currDate))
+        assertEquals("более чем через год", messageDate.add(400, TimeUnits.DAY).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
 
-        Assert.assertEquals("день назад", messageDate.add(-26, TimeUnits.HOUR).humanizeDiff(currDate))
+        assertEquals("только что", messageDate.add(-1, TimeUnits.SECOND).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("1 день назад", messageDate.add(-27, TimeUnits.HOUR).humanizeDiff(currDate))
+        assertEquals("несколько секунд назад", messageDate.add(-45, TimeUnits.SECOND).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("4 дня назад", messageDate.add(-4, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("минуту назад", messageDate.add(-46, TimeUnits.SECOND).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("5 дней назад", messageDate.add(-5, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("1 минуту назад", messageDate.add(-76, TimeUnits.SECOND).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("360 дней назад", messageDate.add(-360, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("минуту назад", messageDate.add(-1, TimeUnits.MINUTE).humanizeDiff(currDate))
 
         resetDates(messageDate, currDate)
-        Assert.assertEquals("более года назад", messageDate.add(-361, TimeUnits.DAY).humanizeDiff(currDate))
+        assertEquals("2 минуты назад", messageDate.add(-2, TimeUnits.MINUTE).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("3 минуты назад", messageDate.add(-3, TimeUnits.MINUTE).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("45 минут назад", messageDate.add(-45, TimeUnits.MINUTE).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("час назад", messageDate.add(-1, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("1 час назад", messageDate.add(-76, TimeUnits.MINUTE).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("2 часа назад", messageDate.add(-120, TimeUnits.MINUTE).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("3 часа назад", messageDate.add(-3, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("4 часа назад", messageDate.add(-4, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("5 часов назад", messageDate.add(-5, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+
+        assertEquals("день назад", messageDate.add(-26, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("1 день назад", messageDate.add(-27, TimeUnits.HOUR).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("4 дня назад", messageDate.add(-4, TimeUnits.DAY).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("5 дней назад", messageDate.add(-5, TimeUnits.DAY).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("360 дней назад", messageDate.add(-360, TimeUnits.DAY).humanizeDiff(currDate))
+
+        resetDates(messageDate, currDate)
+        assertEquals("более года назад", messageDate.add(-361, TimeUnits.DAY).humanizeDiff(currDate))
     }
 
     //=================================================================

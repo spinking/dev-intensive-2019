@@ -7,4 +7,13 @@
     <string name="profile_hint_about">О себе</string>
     <string name="profile_hint_last_name">Фамилия</string>
     <string name="profile_hint_first_name">Имя</string>
+
+    <!--Content Description-->
+    <string name="profile_content_description_switch_theme">switch theme button</string>
+    <string name="profile_content_description_edit_button">edit button</string>
+    <string name="profile_content_description_avatar">avatar</string>
+    <string name="profile_content_description_edit_mode_off">edit mode off</string>
+    <string name="profile_content_description_repository">your repository</string>
+    <string name="profile_content_description_repository_icon">repository icon</string>
+    <string name="profile_content_description_about_icon">about icon</string>
 </resources>
