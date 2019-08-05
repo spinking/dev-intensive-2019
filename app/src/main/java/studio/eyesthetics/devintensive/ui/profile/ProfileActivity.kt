@@ -37,8 +37,6 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
-
-
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
