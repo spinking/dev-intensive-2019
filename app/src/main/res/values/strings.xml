@@ -1,8 +1,14 @@
 <resources>
+    <!--Hardcore Strings-->
     <string name="app_name">Chat Dev-intensive</string>
+    <string name="profile_rank">Junior Android Developer</string>
     <string name="edit_text_hint">Введите сообщение</string>
     <string name="profile_label_rating">Рейтинг</string>
+    <string name="profile_label_rating_count">0</string>
     <string name="profile_label_respect">Уважение</string>
+    <string name="profile_label_respect_count">0</string>
+
+    <!--Hints-->
     <string name="profile_hint_repository">Репозиторий</string>
     <string name="profile_hint_about">О себе</string>
     <string name="profile_hint_last_name">Фамилия</string>

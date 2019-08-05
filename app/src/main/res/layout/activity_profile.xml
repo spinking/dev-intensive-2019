@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_avatar"
                     android:layout_centerHorizontal="true"
-                    android:text="John Doe"
+                    tools:text="John Doe"
                     />
                 <TextView
                     style="@style/Profile.Header.Rank"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_nick_name"
                     android:layout_centerHorizontal="true"
-                    android:text="Junior Android Developer"
+                    android:text="@string/profile_rank"
                     />
             </RelativeLayout>
 
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="0"
+                android:text="@string/profile_label_rating_count"
                 android:drawableStart="@drawable/ic_sp_24"
                 />
 
@@ -141,7 +141,7 @@
                 android:id="@+id/tv_respect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/profile_label_respect_count"
                 android:drawableStart="@drawable/ic_respect_24"
                 />
 
