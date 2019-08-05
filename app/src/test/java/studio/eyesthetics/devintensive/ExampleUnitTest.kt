@@ -337,20 +337,20 @@ class ExampleUnitTest {
 
         val vasya = User("0", "Василий", null)
 
-        val msg_1 = BaseMessage.makeMessage(vasya,
+        val msg1 = BaseMessage.makeMessage(vasya,
             Chat("0"),
             Date(),
             "text",
             "any text message")
-        val msg_2 = BaseMessage.makeMessage(vasya,
+        val msg2 = BaseMessage.makeMessage(vasya,
             Chat("1"),
             Date().add(-2, TimeUnits.HOUR),
             "image",
             "https://anyurl.com",
             true)
 
-        assertEquals("Василий отправил сообщение \"any text message\" только что", msg_1.formatMessage())
-        assertEquals("Василий получил изображение \"https://anyurl.com\" 2 часа назад", msg_2.formatMessage())
+        assertEquals("Василий отправил сообщение \"any text message\" только что", msg1.formatMessage())
+        assertEquals("Василий получил изображение \"https://anyurl.com\" 2 часа назад", msg2.formatMessage())
     }
 
 
