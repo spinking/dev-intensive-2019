@@ -3,14 +3,17 @@ package ru.skillbranch.devintensive.ui.custom
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.widget.ImageView.ScaleType.CENTER_CROP
 import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.dpToPixels
@@ -28,21 +31,21 @@ class CircleImageView @JvmOverloads constructor(
     companion object {
         private val DEFAULT_BORDER_WIDTH = 2.dpToPixels
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
+        private const val DEFAULT_BACKGROUND_COLOR = Color.BLACK
     }
 
     private var borderWidth: Int = DEFAULT_BORDER_WIDTH
     private var borderColor = DEFAULT_BORDER_COLOR
+    private var backgroundColor = DEFAULT_BACKGROUND_COLOR
 
     private var civImage: Bitmap? = null
     private var civDrawable: Drawable? = null
-
     private var paintBorder: Paint = Paint().apply { isAntiAlias = true }
+    private var paintBackground: Paint = Paint().apply { isAntiAlias = true }
     private var paint: Paint = Paint().apply { isAntiAlias = true }
 
     private var circleCenter: Int = 0
     private var heightCircle: Int = 0
-
-
 
     fun getBorderWidth() = borderWidth.pxToDimensionPixels
 
@@ -72,6 +75,12 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 
+    override fun setBackgroundColor(color: Int) {
+        super.setBackgroundColor(color)
+        backgroundColor = color
+        background = ColorDrawable(Color.TRANSPARENT)
+    }
+
     override fun getScaleType(): ScaleType =
         super.getScaleType().let { if (it == null || it != CENTER_INSIDE) CENTER_CROP else it }
 
@@ -79,12 +88,12 @@ class CircleImageView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         loadBitmap()
 
-        if(civImage == null) return
+        val resultPaint = if(civImage == null)
+            paintBackground.apply { color = backgroundColor } else paint
 
         val circleCenterWithBorder = circleCenter + borderWidth
-
         canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), paintBorder)
-        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter.toFloat(), paint)
+        canvas.drawCircle(circleCenterWithBorder.toFloat(), circleCenterWithBorder.toFloat(), circleCenter.toFloat(), resultPaint)
     }
 
     private fun loadBitmap() {
