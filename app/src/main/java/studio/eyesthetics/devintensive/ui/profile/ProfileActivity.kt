@@ -38,7 +38,6 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
-        iv_avatar.setBackgroundColor(Color.RED)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
