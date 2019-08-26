@@ -22,4 +22,5 @@
     <string name="profile_content_description_repository">your repository</string>
     <string name="profile_content_description_repository_icon">repository icon</string>
     <string name="profile_content_description_about_icon">about icon</string>
+    <string name="menu_search_title">Поиск</string>
 </resources>

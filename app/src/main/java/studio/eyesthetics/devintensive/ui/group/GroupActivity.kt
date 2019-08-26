@@ -60,10 +60,12 @@ class GroupActivity : AppCompatActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
+
             //Добавить реализацию для лолипопы
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_primary_light))
             }
+
             setTextColor(Color.WHITE)
 
         }
