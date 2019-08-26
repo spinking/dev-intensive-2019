@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.repositories
+package ru.skillbranch.devintensive.repositories
 
 /**
  * Created by BashkatovSM on 26.08.2019
