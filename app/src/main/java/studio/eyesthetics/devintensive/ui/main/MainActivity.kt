@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
+import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 import studio.eyesthetics.devintensive.ui.adapters.ChatItemTouchHelperCallback
 
@@ -52,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener{
-
+            val intent = Intent(this, GroupActivity::class.java)
+            startActivity(intent)
         }
     }
 
