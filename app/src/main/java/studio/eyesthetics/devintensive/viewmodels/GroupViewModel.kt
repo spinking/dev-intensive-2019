@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.viewmodels
+package ru.skillbranch.devintensive.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -54,4 +54,7 @@ class GroupViewModel : ViewModel() {
     }
 
     private fun loadUsers(): List<UserItem> = groupRepository.loadUsers().map{ it.toUserItem() }
+    fun handleCreateGroup() {
+        groupRepository.createChat(selectedItems.value!!)
+    }
 }
