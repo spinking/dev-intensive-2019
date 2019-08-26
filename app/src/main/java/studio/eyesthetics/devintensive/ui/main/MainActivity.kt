@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(divider)
         }
+
+        fab.setOnClickListener{
+            viewModel.addItems()
+        }
     }
 
     private fun initViewModel() {

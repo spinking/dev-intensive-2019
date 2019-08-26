@@ -32,4 +32,13 @@
             tools:listitem="@layout/item_chat_single"
             />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacing_normal_16"
+            app:srcCompat="@drawable/ic_add_black_24dp"
+            />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
