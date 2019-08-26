@@ -44,6 +44,7 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
 
         fun bind(item: ChatItem) {
             if(item.avatar == null) {
+                //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
                 iv_avatar_single.setInitials(item.initials)
             } else {
                 //TODO set drawable

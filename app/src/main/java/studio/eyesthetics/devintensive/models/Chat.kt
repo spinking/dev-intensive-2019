@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.models
 
+import ru.skillbranch.devintensive.models.data.ChatItem
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 
@@ -29,4 +31,19 @@ class Chat(
     }
 
     private fun isSingle(): Boolean = members.size == 1
+    fun toChatItem(): ChatItem {
+        if(isSingle()) {
+            val user = members.first()
+            ChatItem(
+                id,
+                user.avatar,
+                Utils.toInitials(user.firstName, user.lastName) ?: "??",
+                "${user.firstName ?: ""} ${user.lastName ?: ""}",
+                lastMessageShort(),
+                unreadableMessageCount(),
+                lastMessageDate()?.shortFormat(),
+                user.isOnline
+            )
+        }
+    }
 }

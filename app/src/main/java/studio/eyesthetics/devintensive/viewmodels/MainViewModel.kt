@@ -9,9 +9,16 @@ import ru.skillbranch.devintensive.repositories.ChatRepository
  * Created by BashkatovSM on 26.08.2019
  */
 class MainViewModel: ViewModel() {
+    private val chatRepository =  ChatRepository
+
     fun getChatData() : LiveData<List<ChatItem>> {
-        return mutableLiveData()
+        return mutableLiveData(loadChats())
     }
 
-    private val chatRepository =  ChatRepository
+    private fun loadChats(): List<ChatItem> {
+        val chats = chatRepository.loadChats()
+        return chats.map{
+            it.toChatItem()
+        }
+    }
 }
