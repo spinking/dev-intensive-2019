@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.models
 
+import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
@@ -32,7 +33,7 @@ class Chat(
 
     private fun isSingle(): Boolean = members.size == 1
     fun toChatItem(): ChatItem {
-        if(isSingle()) {
+        return if(isSingle()) {
             val user = members.first()
             ChatItem(
                 id,
@@ -43,6 +44,17 @@ class Chat(
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat(),
                 user.isOnline
+            )
+        } else {
+            ChatItem(
+                id,
+                null,
+                "",
+                title,
+                lastMessageShort(),
+                unreadableMessageCount(),
+                lastMessageDate()?.shortFormat(),
+                false
             )
         }
     }

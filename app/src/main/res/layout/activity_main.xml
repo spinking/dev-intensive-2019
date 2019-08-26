@@ -20,8 +20,6 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 >
 
-
-
             </androidx.appcompat.widget.Toolbar>
             
         </com.google.android.material.appbar.AppBarLayout>
