@@ -15,14 +15,24 @@ class GroupViewModel : ViewModel() {
     private val userItems = mutableLiveData(loadUsers())
     private val selectedItems = Transformations.map(userItems){users -> users.filter { it.isSelected }}
 
-    fun getUserData() : LiveData<List<UserItem>> {
+    fun getUsersData() : LiveData<List<UserItem>> {
         return userItems
     }
 
     fun getSelectedData() : LiveData<List<UserItem>> = selectedItems
 
     fun handleSelectedItem(userId: String) {
+        userItems.value = userItems.value!!.map{
+            if(it.id == userId) it.copy(isSelected = !it.isSelected)
+            else it
+        }
     }
 
+    fun handleRemoveChip(userId: String) {
+        userItems.value = userItems.value!!.map{
+            if(it.id == userId) it.copy(isSelected = false)
+            else it
+        }
+    }
     private fun loadUsers(): List<UserItem> = groupRepository.loadUsers().map{ it.toUserItem() }
 }
