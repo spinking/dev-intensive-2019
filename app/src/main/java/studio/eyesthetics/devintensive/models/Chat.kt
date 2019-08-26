@@ -9,7 +9,7 @@ import java.util.*
 /**
  * Created by BashkatovSM on 28.06.2019
  */
-class Chat(
+data class Chat(
     val id:String,
     val title: String,
     val members: List<User> = listOf(),
@@ -26,9 +26,9 @@ class Chat(
         return Date()
     }
 
-    private fun lastMessageShort(): String {
+    private fun lastMessageShort(): Pair<String, String> {
         //TODO implement me
-        return "Сообщений нет"
+        return "Сообщений нет" to "@John_Doe"
     }
 
     private fun isSingle(): Boolean = members.size == 1
@@ -40,7 +40,7 @@ class Chat(
                 user.avatar,
                 Utils.toInitials(user.firstName, user.lastName) ?: "??",
                 "${user.firstName ?: ""} ${user.lastName ?: ""}",
-                lastMessageShort(),
+                lastMessageShort().first,
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat(),
                 user.isOnline
@@ -51,11 +51,19 @@ class Chat(
                 null,
                 "",
                 title,
-                lastMessageShort(),
+                lastMessageShort().first,
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat(),
-                false
+                false,
+                ChatType.GROUP,
+                lastMessageShort().second
             )
         }
     }
+}
+
+enum class ChatType{
+    SINGLE,
+    GROUP,
+    ARCHIVE
 }
