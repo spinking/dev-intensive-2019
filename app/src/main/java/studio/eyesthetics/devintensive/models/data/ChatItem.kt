@@ -1,7 +1,5 @@
 package ru.skillbranch.devintensive.models.data
 
-import ru.skillbranch.devintensive.models.ChatType
-
 /**
  * Created by BashkatovSM on 26.08.2019
  */

@@ -2,8 +2,9 @@ package ru.skillbranch.devintensive.data.managers
 
 import androidx.lifecycle.MutableLiveData
 import ru.skillbranch.devintensive.extensions.mutableLiveData
-import ru.skillbranch.devintensive.models.Chat
-import ru.skillbranch.devintensive.models.User
+import ru.skillbranch.devintensive.models.data.Chat
+import ru.skillbranch.devintensive.models.data.User
+import ru.skillbranch.devintensive.utils.DataGenerator
 
 /**
  * Created by BashkatovSM on 26.08.2019
