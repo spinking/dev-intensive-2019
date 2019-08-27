@@ -1,7 +1,6 @@
-package ru.skillbranch.devintensive.models
+package ru.skillbranch.devintensive.models.data
 
 import ru.skillbranch.devintensive.extensions.humanizeDiff
-import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 

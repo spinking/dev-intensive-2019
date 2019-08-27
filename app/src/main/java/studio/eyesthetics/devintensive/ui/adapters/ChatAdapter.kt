@@ -11,13 +11,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
-import kotlinx.android.synthetic.main.item_chat_single.view.*
-import kotlinx.android.synthetic.main.item_chat_single.view.iv_avatar_single
-import kotlinx.android.synthetic.main.item_chat_single.view.tv_title_single
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.models.ChatType
 import ru.skillbranch.devintensive.models.data.ChatItem
-import studio.eyesthetics.devintensive.ui.adapters.ItemTouchViewHolder
+import ru.skillbranch.devintensive.models.data.ChatType
 
 /**
  * Created by BashkatovSM on 26.08.2019
@@ -79,7 +75,8 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
         abstract fun bind(item : ChatItem, listener : (ChatItem) -> Unit)
     }
 
-    inner class SingleViewHolder(convertView: View) : ChatItemViewHolder(convertView), LayoutContainer, ItemTouchViewHolder {
+    inner class SingleViewHolder(convertView: View) : ChatItemViewHolder(convertView), LayoutContainer,
+        ItemTouchViewHolder {
         override fun onItemSelected() {
             itemView.setBackgroundColor(Color.LTGRAY)
         }
@@ -93,7 +90,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
                 //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
                 Glide.with(itemView)
                     .clear(iv_avatar_single)
-                iv_avatar_single.setInitials(item.initials)
+                //iv_avatar_single.setInitials(item.initials)
             } else {
                 Glide.with(itemView)
                     .load(item.avatar)
@@ -132,7 +129,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
             //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
-            iv_avatar_group.setInitials(item.initials)
+            //iv_avatar_group.setInitials(item.initials)
 
             sv_indicator.visibility = if(item.isOnline) View.VISIBLE else View.GONE
             with(tv_date_group) {

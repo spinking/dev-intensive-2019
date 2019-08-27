@@ -1,4 +1,4 @@
-package studio.eyesthetics.devintensive.ui.adapters
+package ru.skillbranch.devintensive.ui.adapters
 
 import android.graphics.Canvas
 import android.graphics.Paint
