@@ -19,21 +19,18 @@ data class Chat(
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
-        //TODO implement me
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
         return unread.size
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
-        //TODO implement me
         //Последняя дата в списке сообщений
         return messages.lastOrNull()?.date
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String?, String?> = when(val lastMessage = messages.lastOrNull()){
-       //TODO implement me
        //128 символов
         null -> "Сообщений нет" to "@John_Doe"
         else -> (lastMessage as TextMessage).text!!.truncate(128) to lastMessage.from!!.firstName
