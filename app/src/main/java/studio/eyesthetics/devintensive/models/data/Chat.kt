@@ -33,6 +33,7 @@ data class Chat(
     fun lastMessageShort(): Pair<String?, String?> = when(val lastMessage = messages.lastOrNull()){
        //128 символов
         null -> "Сообщений нет" to "@John_Doe"
+        is ImageMessage -> "${lastMessage.from!!.firstName} - отправил фото" to lastMessage.from.firstName
         else -> (lastMessage as TextMessage).text!!.truncate(128) to lastMessage.from!!.firstName
     }
 
