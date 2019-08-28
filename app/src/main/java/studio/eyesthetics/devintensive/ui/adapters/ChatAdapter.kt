@@ -131,7 +131,6 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
             //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
             //iv_avatar_group.setInitials(item.initials)
 
-            sv_indicator.visibility = if(item.isOnline) View.VISIBLE else View.GONE
             with(tv_date_group) {
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
