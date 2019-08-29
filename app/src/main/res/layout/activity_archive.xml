@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
-            tools:listitem="@layout/item_archive_group"
+            tools:listitem="@layout/item_chat_archive"
     />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

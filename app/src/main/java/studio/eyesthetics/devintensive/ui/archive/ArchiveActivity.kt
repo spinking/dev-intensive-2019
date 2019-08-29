@@ -34,7 +34,7 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        chatAdapter = ChatAdapter{
+        chatAdapter = ChatAdapter(this){
             Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
         }
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
