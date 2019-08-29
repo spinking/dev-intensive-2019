@@ -167,14 +167,7 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
         }
     }
 
-    inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView), LayoutContainer, ItemTouchViewHolder {
-        override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
-        }
-
-        override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
-        }
+    inner class ArchiveViewHolder(convertView: View) : ChatItemViewHolder(convertView), LayoutContainer {
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
 
@@ -188,16 +181,15 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
                 text = item.messageCount.toString()
             }
 
-            tv_title_archive.text = item.title
+            tv_title_archive.text = "Архив чатов"
             tv_message_archive.text = item.shortDescription
 
             with(tv_message_author_archive) {
                 visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
-                text = "item.author"
+                text = item.author
             }
 
             itemView.setOnClickListener{
-                //listener.invoke(item)
                 val intent = Intent(context, ArchiveActivity::class.java)
                 context.startActivity(intent)
             }

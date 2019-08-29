@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
@@ -22,6 +23,10 @@ class ArchiveViewModel : ViewModel() {
     }
 
     fun getChatData() : LiveData<List<ChatItem>> {
+        return chats
+    }
+
+    /*fun getChatData() : LiveData<List<ChatItem>> {
         val result = MediatorLiveData<List<ChatItem>>()
 
         val filterF = {
@@ -35,9 +40,10 @@ class ArchiveViewModel : ViewModel() {
         result.addSource(chats) { filterF.invoke() }
         result.addSource(query) {filterF.invoke()}
         return result
-    }
+    }*/
 
     fun addToArchive(chatId: String) {
+        //Log.d("M_ArchiveViewModel", "${chats.value!!.last().lastMessageDate}")
         val chat = chatRepository.find(chatId)
         chat ?: return
         chatRepository.update(chat.copy(isArchived = true))
@@ -51,6 +57,18 @@ class ArchiveViewModel : ViewModel() {
 
     fun handleSearchQuery(text: String) {
         query.value = text
+    }
+
+    fun getLastMessage() = chats.value!!.last().shortDescription
+
+    fun getLastDate() = chats.value!!.last().lastMessageDate
+
+    fun getCountMessages() {
+        var count = 0
+        for((i,v) in chats.value!!) {
+            Log.d("M_ArchiveViewModel", "i : $i")
+            Log.d("M_ArchiveViewModel", "v : $v")
+        }
     }
 
 }
