@@ -12,6 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.archive.ArchiveActivity">
+        </activity>
         <activity android:name=".ui.group.GroupActivity">
         </activity>
         <activity android:name=".ui.main.MainActivity">
