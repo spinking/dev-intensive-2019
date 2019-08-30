@@ -30,6 +30,10 @@ object ChatRepository {
         return chats.value!!.getOrNull(find)
     }
 
+    fun getArchiveChatsCount(): Int {
+        return chats.value!!.filter { it.isArchived }.size
+    }
+
     fun getShortDescription(): String? {
         return chats.value!!.filter { it.isArchived }.lastOrNull()?.lastMessageShort()?.first ?: "message test"
     }

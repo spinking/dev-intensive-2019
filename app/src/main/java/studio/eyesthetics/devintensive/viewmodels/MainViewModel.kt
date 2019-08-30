@@ -22,9 +22,13 @@ class MainViewModel: ViewModel() {
         var searchChats: MutableList<ChatItem>
         val filterF = {
             val queryStr = query.value!!
+            if(chatRepository.getArchiveChatsCount() > 0) {
                 searchChats = mutableListOf(
                     getArchiveItem()
                 )
+            } else {
+                searchChats = mutableListOf()
+            }
 
             searchChats.addAll(chats.value!!)
 

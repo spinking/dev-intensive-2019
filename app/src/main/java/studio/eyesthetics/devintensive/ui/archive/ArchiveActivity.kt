@@ -15,6 +15,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
+import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class ArchiveActivity : AppCompatActivity() {
 
