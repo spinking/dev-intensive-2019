@@ -16,12 +16,14 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.group.GroupActivity
+import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var viewModel: MainViewModel
+    private lateinit var archiveViewModel: ArchiveViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +66,8 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
             viewModel.addToArchive(it.id)
+            chatAdapter.notifyItemChanged(0)
+
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
 
             Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
@@ -86,6 +90,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
+        archiveViewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
+        archiveViewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
     }

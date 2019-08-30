@@ -36,7 +36,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
     val context = context
 
     override fun getItemViewType(position: Int): Int {
-        if(position == 0) return ARCHIVE_TYPE
         return when(items[position].chatType) {
             ChatType.ARCHIVE -> ARCHIVE_TYPE
             ChatType.SINGLE -> SINGLE_TYPE
@@ -57,7 +56,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ChatItemViewHolder, position: Int) {
-        //Log.d("M_ChatAdapter", "onBindViewHolder $position")
         holder.bind(items[position], listener)
     }
 

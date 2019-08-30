@@ -1,12 +1,9 @@
 package ru.skillbranch.devintensive.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
-import ru.skillbranch.devintensive.models.data.UserItem
+import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.repositories.ChatRepository
 /**
  * Created by BashkatovSM on 26.08.2019
@@ -22,15 +19,18 @@ class MainViewModel: ViewModel() {
 
     fun getChatData() : LiveData<List<ChatItem>> {
         val result = MediatorLiveData<List<ChatItem>>()
-
+        var searchChats: MutableList<ChatItem>
         val filterF = {
             val queryStr = query.value!!
-            val searchChats = chats.value!!
+                searchChats = mutableListOf(
+                    getArchiveItem()
+                )
+
+            searchChats.addAll(chats.value!!)
 
             result.value = if(queryStr.isEmpty()) searchChats
             else searchChats.filter { it.title.contains(queryStr, true) }
         }
-
         result.addSource(chats) { filterF.invoke() }
         result.addSource(query) {filterF.invoke()}
         return result
@@ -50,5 +50,20 @@ class MainViewModel: ViewModel() {
 
     fun handleSearchQuery(text: String) {
         query.value = text
+    }
+
+    private fun getArchiveItem(): ChatItem {
+        return ChatItem(
+            "none",
+            "",
+            "",
+            "Архив чатов",
+            chatRepository.getShortDescription(),
+            chatRepository.getMessageCount(),
+            chatRepository.getLastDate(),
+            false,
+            ChatType.ARCHIVE,
+            chatRepository.getLastAuthor()
+        )
     }
 }
