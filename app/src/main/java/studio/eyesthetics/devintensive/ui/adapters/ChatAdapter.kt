@@ -179,7 +179,8 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
                 text = item.messageCount.toString()
             }
 
-            tv_title_archive.text = "Архив чатов"
+            tv_title_archive.text = item.title
+
             tv_message_archive.text = item.shortDescription
 
             with(tv_message_author_archive) {
@@ -191,7 +192,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
                 val intent = Intent(context, ArchiveActivity::class.java)
                 context.startActivity(intent)
             }
-
         }
     }
 
