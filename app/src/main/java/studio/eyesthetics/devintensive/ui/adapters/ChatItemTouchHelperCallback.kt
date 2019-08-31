@@ -21,6 +21,7 @@ import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
  * Created by BashkatovSM on 26.08.2019
  */
 class ChatItemTouchHelperCallback(
+    val activity: String,
     val adapter: ChatAdapter,
     val swipeListener : (ChatItem) -> Unit
 ): ItemTouchHelper.Callback() {
@@ -79,11 +80,22 @@ class ChatItemTouchHelperCallback(
 
     private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
         val icon: Drawable
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp, itemView.context.theme)
-        } else {
-            icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp)
+
+        when(activity) {
+            "archive activity" -> if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp, itemView.context.theme)
+            } else {
+                icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp)
+            }
+            else -> if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp, itemView.context.theme)
+            } else {
+                icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp)
+            }
+
         }
+
+
         val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.icon_size)
         val space = itemView.resources.getDimensionPixelSize(R.dimen.spacing_normal_16)
 
@@ -120,6 +132,11 @@ class ChatItemTouchHelperCallback(
             canvas.drawRect(bgRect, bgPaint)
         }
     }
+}
+
+enum class TypeOfActivity {
+    ARCHIVE_ACTIVITY,
+    MAIN_ACTIVITY
 }
 
 interface ItemTouchViewHolder{
