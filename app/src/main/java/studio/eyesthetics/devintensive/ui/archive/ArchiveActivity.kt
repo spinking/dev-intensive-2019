@@ -38,23 +38,34 @@ class ArchiveActivity : AppCompatActivity() {
 
     private fun initViews() {
         chatAdapter = ChatAdapter(this){
-            Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
+            val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
+            val snackBarView = snackbar.view
+            snackBarView.setBackgroundColor(getPrimaryColor())
+            snackbar.show()
         }
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
-            viewModel.addToArchive(it.id)
+            viewModel.restoreFromArchive(it.id)
             chatAdapter.notifyItemChanged(0)
 
-            val snackbar: Snackbar
-
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
-            snackbar = Snackbar.make(rv_chat_list, "Восстановить чат с ${it.title} из архива?", Snackbar.LENGTH_LONG)
-                .setAction("Нет") { _ -> viewModel.restoreFromArchive(it.id) }
+            val snackbar = Snackbar.make(rv_archive_list, "Восстановить чат с ${it.title} из архива?", Snackbar.LENGTH_LONG)
+                .setAction("Нет") { _ -> viewModel.addToArchive(it.id) }
             snackbar.setActionTextColor(getAccentColor())
             val snackBarView = snackbar.view
             snackBarView.setBackgroundColor(getPrimaryColor())
             snackbar.show()
+
+        }
+
+        val touchHelper = ItemTouchHelper(touchCallback)
+        touchHelper.attachToRecyclerView(rv_archive_list)
+
+        with(rv_archive_list) {
+            adapter = chatAdapter
+            layoutManager = LinearLayoutManager(this@ArchiveActivity)
+            addItemDecoration(divider)
         }
     }
 

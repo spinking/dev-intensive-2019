@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -61,7 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         chatAdapter = ChatAdapter(this){
-            Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
+            val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
+            val snackBarView = snackbar.view
+            snackBarView.setBackgroundColor(getPrimaryColor())
+            snackbar.show()
         }
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -69,10 +73,8 @@ class MainActivity : AppCompatActivity() {
             viewModel.addToArchive(it.id)
             chatAdapter.notifyItemChanged(0)
 
-            val snackbar: Snackbar
-
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
-            snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
                 .setAction("Нет") { _ -> viewModel.restoreFromArchive(it.id) }
             snackbar.setActionTextColor(getAccentColor())
             val snackBarView = snackbar.view

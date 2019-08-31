@@ -15,4 +15,7 @@
     <color name="color_divider_light">#1FFFFFFF</color>
     <color name="color_indicator">#581F99</color>
     <color name="color_green">#4FD149</color>
+    <color name="color_item_dark">#1D1D1D</color>
+    <color name="color_item_light">#FFFFFF</color>
+    <color name="color_toolbar_night">#272727</color>
 </resources>

@@ -10,6 +10,8 @@
         <item name="colorGrayDark">@color/color_gray_dark</item>
         <item name="colorIndicator">@color/color_indicator</item>
         <item name="colorSVIndicator">@color/color_green</item>
+        <item name="colorItemBackground">@color/color_item_light</item>
+        <item name="colorToolbar">@color/color_primary</item>
 
         <item name="colorAccentedSurface">@color/color_primary_light</item>
         <item name="colorIcon">@color/color_gray</item>
