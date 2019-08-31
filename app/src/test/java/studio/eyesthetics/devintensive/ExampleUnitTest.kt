@@ -5,6 +5,8 @@ import org.junit.Test
 import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.models.data.Chat
+import ru.skillbranch.devintensive.models.data.User
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -98,8 +100,8 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Spin King")
-        val txtMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any text message", type = "text", isIncoming = false)
-        val imgMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any image url", type = "image", isIncoming = true)
+        val txtMessage = BaseMessage.makeMessage(user, Chat("0", ""), payload = "any text message", type = "text", isIncoming = false)
+        val imgMessage = BaseMessage.makeMessage(user, Chat("0", ""), payload = "any image url", type = "image", isIncoming = true)
 
         println(txtMessage.formatMessage())
         println(imgMessage.formatMessage())
@@ -337,12 +339,12 @@ class ExampleUnitTest {
         val vasya = User("0", "Василий", null)
 
         val msg1 = BaseMessage.makeMessage(vasya,
-            Chat("0"),
+            Chat("0", ""),
             Date(),
             "text",
             "any text message")
         val msg2 = BaseMessage.makeMessage(vasya,
-            Chat("1"),
+            Chat("1", ""),
             Date().add(-2, TimeUnits.HOUR),
             "image",
             "https://anyurl.com",
@@ -436,7 +438,7 @@ class ExampleUnitTest {
     @Test
     fun test_messages() {
         val user = User.makeUser("Максим Никельман")
-        val chat = Chat("1")
+        val chat = Chat("1","")
         val date = Date()
         assertEquals("Максим отправил сообщение \"any text message\" только что", BaseMessage.makeMessage(user, chat, date, "text", "any text message").formatMessage())
         assertEquals("Максим получил изображение \"https://anyurl.com\" 2 часа назад", BaseMessage.makeMessage(user, chat, date.add(-2, TimeUnits.HOUR), "image", "https://anyurl.com",true).formatMessage())
