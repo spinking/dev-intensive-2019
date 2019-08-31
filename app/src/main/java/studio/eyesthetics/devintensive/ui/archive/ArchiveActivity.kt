@@ -51,11 +51,11 @@ class ArchiveActivity : AppCompatActivity() {
         divider.setDrawable(getDrawable(R.drawable.divider))
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
             viewModel.restoreFromArchive(it.id)
-            chatAdapter.notifyItemChanged(0)
+            //chatAdapter.notifyItemChanged(0)
 
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
             val snackbar = Snackbar.make(rv_archive_list, "Восстановить чат с ${it.title} из архива?", Snackbar.LENGTH_LONG)
-                .setAction("Нет") { _ -> viewModel.addToArchive(it.id) }
+                .setAction("отмена".toUpperCase()) { _ -> viewModel.addToArchive(it.id) }
             snackbar.setActionTextColor(getAccentColor())
             val snackBarView = snackbar.view
             snackBarView.setBackgroundColor(getPrimaryColor())

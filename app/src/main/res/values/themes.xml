@@ -17,6 +17,8 @@
         <item name="colorIcon">@color/color_gray</item>
         <item name="colorDivider">@color/color_divider_dark</item>
         <item name="colorSnackBarText">@color/color_item_light</item>
+        <item name="colorDoneIcon">@color/color_primary</item>
+        <item name="colorChip">@color/color_primary_light</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>

@@ -40,6 +40,8 @@
                 android:layout_marginTop="@dimen/spacing_small_8"
                 android:layout_marginBottom="@dimen/spacing_small_8"
                 android:visibility="gone"
+                android:background="?attr/colorChip"
+                app:chipBackgroundColor="?attr/colorChip"
         >
 
         </com.google.android.material.chip.ChipGroup>
