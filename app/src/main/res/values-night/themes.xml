@@ -11,6 +11,7 @@
         <item name="colorSVIndicator">@color/color_accent_night</item>
         <item name="colorItemBackground">@color/color_item_dark</item>
         <item name="colorToolbar">@color/color_toolbar_night</item>
+        <item name="colorGrayDark">@color/color_gray</item>
 
         <item name="colorAccentedSurface">@color/color_divider_light</item>
         <item name="colorIcon">@android:color/white</item>

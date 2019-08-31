@@ -20,6 +20,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
 import ru.skillbranch.devintensive.viewmodels.GroupViewModel
+import java.security.AccessController.getContext
 
 class GroupActivity : AppCompatActivity() {
 
@@ -73,6 +74,7 @@ class GroupActivity : AppCompatActivity() {
     private fun initViews() {
         usersAdapter = UserAdapter { viewModel.handleSelectedItem(it.id) }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        //divider.setDrawable(getDrawable(R.drawable.divider))
         with(rv_user_list) {
             adapter = usersAdapter
             layoutManager = LinearLayoutManager(this@GroupActivity)
