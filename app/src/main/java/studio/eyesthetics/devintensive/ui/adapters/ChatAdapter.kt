@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_chat_archive.*
 import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
@@ -87,11 +90,15 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
     inner class SingleViewHolder(convertView: View) : ChatItemViewHolder(convertView), LayoutContainer,
         ItemTouchViewHolder {
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
+            //itemView.setBackgroundColor(Color.LTGRAY)
+            val color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_item_dark else R.color.color_item_light)
+            itemView.setBackgroundColor(color)
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            //itemView.setBackgroundColor(Color.WHITE)
+            val color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_item_dark else R.color.color_item_light)
+            itemView.setBackgroundColor(color)
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
