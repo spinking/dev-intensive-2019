@@ -46,6 +46,6 @@ object ChatRepository {
     }
 
     fun getMessageCount(): Int {
-        return chats.value!!.filter { it.isArchived }.sumBy { a -> a.unreadableMessageCount() }
+        return chats.value!!.filter { it.isArchived }.sumBy { it.unreadableMessageCount() }
     }
 }
