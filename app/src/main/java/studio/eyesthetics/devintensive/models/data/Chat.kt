@@ -18,10 +18,11 @@ data class Chat(
     var isArchived: Boolean = false
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun unreadableMessageCount(): Int {
+    /*fun unreadableMessageCount(): Int {
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
         return unread.size - 1
-    }
+    }*/
+    fun unreadableMessageCount(): Int = messages.count{ (it as TextMessage).isReaded.not() }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
@@ -38,6 +39,29 @@ data class Chat(
     }
 
     private fun isSingle(): Boolean = members.size == 1
+
+    companion object {
+        private const val ARCHIVE_ID = "-1"
+        fun toArchiveChatItem(chats: List<Chat>): ChatItem? {
+            return if (chats.isEmpty()) null
+            else {
+                val lastChat = chats.sortedByDescending { it.lastMessageDate() }.first()
+                val (message, author) = lastChat.lastMessageShort()
+                ChatItem(
+                    ARCHIVE_ID,
+                    null,
+                    "",
+                    "Архив чатов",
+                    message,
+                    chats.sumBy { it.unreadableMessageCount() },
+                    lastChat.lastMessageDate()?.shortFormat(),
+                    false,
+                    ChatType.ARCHIVE,
+                    author
+                )
+            }
+        }
+    }
 
     fun toChatItem(): ChatItem {
         return if (isSingle()) {
