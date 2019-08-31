@@ -5,9 +5,14 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
@@ -102,11 +107,14 @@ class ChatItemTouchHelperCallback(
             bottom = itemView.bottom.toFloat()
         }
         with(bgPaint) {
-            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                color = itemView.resources.getColor(R.color.color_primary_dark, itemView.context.theme)
+            color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_accent_night else R.color.color_primary_dark)
+
+            /*if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
+                //color = itemView.resources.getColor(R.color.color_primary_dark, itemView.context.theme)
             } else {
                 color = itemView.resources.getColor(R.color.color_primary_dark)
-            }
+            }*/
             //ДЗ при свайпе прямоугольник должен менять цвет последовательно через промежуточные значения
 
             canvas.drawRect(bgRect, bgPaint)

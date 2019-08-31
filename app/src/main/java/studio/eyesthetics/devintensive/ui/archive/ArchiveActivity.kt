@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -41,6 +42,8 @@ class ArchiveActivity : AppCompatActivity() {
             val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
             val snackBarView = snackbar.view
             snackBarView.setBackgroundColor(getPrimaryColor())
+            val textView: TextView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text)
+            textView.setTextColor(getSnackbarColor())
             snackbar.show()
         }
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
@@ -56,6 +59,8 @@ class ArchiveActivity : AppCompatActivity() {
             snackbar.setActionTextColor(getAccentColor())
             val snackBarView = snackbar.view
             snackBarView.setBackgroundColor(getPrimaryColor())
+            val textView: TextView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text)
+            textView.setTextColor(getSnackbarColor())
             snackbar.show()
 
         }
@@ -84,6 +89,11 @@ class ArchiveActivity : AppCompatActivity() {
     private fun getAccentColor(): Int {
         val tv = TypedValue()
         theme.resolveAttribute(R.attr.colorAccent, tv, true)
+        return tv.data
+    }
+    private fun getSnackbarColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorSnackBarText, tv, true)
         return tv.data
     }
 }
