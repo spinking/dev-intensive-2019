@@ -20,6 +20,7 @@
         <item name="colorSnackBarText">@color/color_snackbar_text_dark</item>
         <item name="colorDoneIcon">@color/color_accent_night</item>
         <item name="colorChip">@color/color_item_dark</item>
+        <item name="colorChipCloseIcon">@color/color_gray_dark</item>
     </style>
 
 </resources>

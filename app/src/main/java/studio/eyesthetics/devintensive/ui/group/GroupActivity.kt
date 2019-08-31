@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.group
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -110,6 +111,11 @@ class GroupActivity : AppCompatActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
+            chipCornerRadius = 5F
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                chipBackgroundColor = getColorStateList(getPrimaryColor())
+                closeIconTint = getColorStateList(getCloseIconColor())
+            }
 
             //Добавить реализацию для лолипопы
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -138,5 +144,16 @@ class GroupActivity : AppCompatActivity() {
         }
 
         users.forEach{(_,v) -> addChipToGroup(v)}
+    }
+
+    private fun getPrimaryColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorPrimary, tv, true)
+        return tv.data
+    }
+    private fun getCloseIconColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorChipCloseIcon, tv, true)
+        return tv.data
     }
 }
