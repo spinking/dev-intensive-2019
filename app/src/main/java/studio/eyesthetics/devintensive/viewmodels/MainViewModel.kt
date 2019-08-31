@@ -1,22 +1,15 @@
 package ru.skillbranch.devintensive.viewmodels
 
 import androidx.lifecycle.*
-import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.extensions.shortFormat
-import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.repositories.ChatRepository
-import ru.skillbranch.devintensive.ui.main.MainActivity
 
 class MainViewModel: ViewModel() {
     private val query = mutableLiveData("")
     private val chatRepository = ChatRepository
-    /*private val chats = Transformations.map(chatRepository.loadChats()){chats ->
-    return@map chats
-        .sortedBy { it.id.toInt() }
-         }*/
     private val chats = chatRepository.loadChats()
 
     fun getChatData() : LiveData<List<ChatItem>> {
@@ -35,10 +28,7 @@ class MainViewModel: ViewModel() {
                 .toMutableList()
 
 
-            Chat.toArchiveChatItem(archivedChats)?.let {
-                chatItems.add(0, it)
-            }
-            /*if (archivedChats.isEmpty().not()) {
+            if (archivedChats.isEmpty().not()) {
                 val lastChat = archivedChats.sortedByDescending { it.lastMessageDate() }.first()
                 chatItems.add(0, ChatItem(
                     "none",
@@ -52,7 +42,7 @@ class MainViewModel: ViewModel() {
                     ChatType.ARCHIVE,
                     lastChat.lastMessageShort().second
                 ))
-            }*/
+            }
 
             result.value = chatItems
         }
