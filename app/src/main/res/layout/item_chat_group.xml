@@ -17,17 +17,17 @@
         />
 
     <TextView
-        android:id="@+id/tv_title_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="chat title"
-        android:textColor="@color/color_primary"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="14sp"
-        android:layout_toRightOf="@id/iv_avatar_group"
-        android:layout_toLeftOf="@id/tv_date_group"
-        android:layout_marginRight="@dimen/spacing_normal_16"
-        android:maxLines="1"
+            android:id="@+id/tv_title_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="chat title"
+            android:textColor="?attr/colorPrimary"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/iv_avatar_group"
+            android:layout_toLeftOf="@id/tv_date_group"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+            android:maxLines="1"
     />
 
     <TextView
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="John Doe"
-            android:textColor="@color/color_primary"
+            android:textColor="?attr/colorPrimary"
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_group"
             android:layout_marginRight="@dimen/spacing_tiny_4"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Когда я проходил интенсив, я мало спал"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="?attr/colorGrayDark"
             android:textSize="14sp"
             android:layout_toRightOf="@id/tv_message_author"
             android:layout_toLeftOf="@id/tv_counter_group"
@@ -56,15 +56,15 @@
     />
 
     <TextView
-        android:id="@+id/tv_date_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/color_gray_dark"
-        tools:text="18:00"
-        />
+            android:id="@+id/tv_date_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="?attr/colorGrayDark"
+            tools:text="18:00"
+    />
     <TextView
         android:id="@+id/tv_counter_group"
         android:layout_width="wrap_content"

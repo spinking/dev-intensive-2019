@@ -2,6 +2,7 @@ package ru.skillbranch.devintensive.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -68,11 +69,15 @@ class MainActivity : AppCompatActivity() {
             viewModel.addToArchive(it.id)
             chatAdapter.notifyItemChanged(0)
 
-            //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
+            val snackbar: Snackbar
 
-            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
-                .setAction("Нет") { _ -> viewModel.restoreFromArchive(it.id)}
-                .show()
+            //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
+            snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+                .setAction("Нет") { _ -> viewModel.restoreFromArchive(it.id) }
+            snackbar.setActionTextColor(getAccentColor())
+            val snackBarView = snackbar.view
+            snackBarView.setBackgroundColor(getPrimaryColor())
+            snackbar.show()
         }
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv_chat_list)
@@ -94,5 +99,17 @@ class MainActivity : AppCompatActivity() {
         archiveViewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
+    }
+
+    private fun getPrimaryColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorPrimary, tv, true)
+        return tv.data
+    }
+
+    private fun getAccentColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorAccent, tv, true)
+        return tv.data
     }
 }

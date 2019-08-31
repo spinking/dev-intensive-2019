@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.archive
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_archive.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
@@ -41,24 +43,35 @@ class ArchiveActivity : AppCompatActivity() {
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
-            viewModel.restoreFromArchive(it.id)
+            viewModel.addToArchive(it.id)
+            chatAdapter.notifyItemChanged(0)
 
-            Snackbar.make(rv_archive_list, "Вы точно хотите убрать ${it.title} из архива?", Snackbar.LENGTH_LONG)
-                .setAction("Нет") { _ -> viewModel.addToArchive(it.id)}
-                .show()
-        }
-        val touchHelper = ItemTouchHelper(touchCallback)
-        touchHelper.attachToRecyclerView(rv_archive_list)
+            val snackbar: Snackbar
 
-        with(rv_archive_list) {
-            adapter = chatAdapter
-            layoutManager = LinearLayoutManager(this@ArchiveActivity)
-            addItemDecoration(divider)
+            //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
+            snackbar = Snackbar.make(rv_chat_list, "Восстановить чат с ${it.title} из архива?", Snackbar.LENGTH_LONG)
+                .setAction("Нет") { _ -> viewModel.restoreFromArchive(it.id) }
+            snackbar.setActionTextColor(getAccentColor())
+            val snackBarView = snackbar.view
+            snackBarView.setBackgroundColor(getPrimaryColor())
+            snackbar.show()
         }
     }
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
+    }
+
+    private fun getPrimaryColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorPrimary, tv, true)
+        return tv.data
+    }
+
+    private fun getAccentColor(): Int {
+        val tv = TypedValue()
+        theme.resolveAttribute(R.attr.colorAccent, tv, true)
+        return tv.data
     }
 }
