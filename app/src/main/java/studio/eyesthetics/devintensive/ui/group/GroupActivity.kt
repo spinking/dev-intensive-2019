@@ -111,7 +111,6 @@ class GroupActivity : AppCompatActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            chipCornerRadius = 5F
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 chipBackgroundColor = getColorStateList(getPrimaryColor())
                 closeIconTint = getColorStateList(getCloseIconColor())
