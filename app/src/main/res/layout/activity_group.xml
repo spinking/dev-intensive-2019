@@ -30,6 +30,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="?attr/actionBarSize"
+            android:background="?attr/colorSnackBarText"
     >
         <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group"

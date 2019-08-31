@@ -2,12 +2,14 @@ package ru.skillbranch.devintensive.ui.group
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import androidx.lifecycle.Observer
@@ -111,15 +113,24 @@ class GroupActivity : AppCompatActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                chipBackgroundColor = getColorStateList(getPrimaryColor())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                chipBackgroundColor = getColorStateList(getChipColor())
                 closeIconTint = getColorStateList(getCloseIconColor())
+            } else {
+                if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                    chipBackgroundColor = resources.getColorStateList(R.color.color_item_dark)
+                    closeIconTint = resources.getColorStateList(R.color.color_gray)
+                } else {
+                    chipBackgroundColor = resources.getColorStateList(R.color.color_primary_light)
+                    closeIconTint = resources.getColorStateList(R.color.color_item_light)
+                }
+
             }
 
             //Добавить реализацию для лолипопы
-            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_primary_light))
-            }
+            }*/
 
             setTextColor(Color.WHITE)
 
@@ -145,9 +156,9 @@ class GroupActivity : AppCompatActivity() {
         users.forEach{(_,v) -> addChipToGroup(v)}
     }
 
-    private fun getPrimaryColor(): Int {
+    private fun getChipColor(): Int {
         val tv = TypedValue()
-        theme.resolveAttribute(R.attr.colorPrimary, tv, true)
+        theme.resolveAttribute(R.attr.colorChip, tv, true)
         return tv.data
     }
     private fun getCloseIconColor(): Int {
