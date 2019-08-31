@@ -39,7 +39,7 @@ class ArchiveActivity : AppCompatActivity() {
 
     private fun initViews() {
         chatAdapter = ChatAdapter(this){
-            val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
             val snackBarView = snackbar.view
             snackBarView.setBackgroundColor(getPrimaryColor())
             val textView: TextView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text)
