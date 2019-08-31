@@ -20,7 +20,7 @@ data class Chat(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
-        return unread.size
+        return unread.size - 1
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
