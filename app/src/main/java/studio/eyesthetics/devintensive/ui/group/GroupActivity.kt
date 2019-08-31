@@ -112,10 +112,12 @@ class GroupActivity : AppCompatActivity() {
             isCloseIconVisible = true
             tag = user.id
             isClickable = true
-            closeIconTint = ColorStateList.valueOf(Color.WHITE)
+            //closeIconTint = ColorStateList.valueOf(Color.WHITE)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                chipBackgroundColor = getColorStateList(getChipColor())
-                closeIconTint = getColorStateList(getCloseIconColor())
+                /*chipBackgroundColor = getColorStateList(getChipColor())
+                closeIconTint = getColorStateList(getCloseIconColor())*/
+                chipBackgroundColor = ColorStateList.valueOf(getChipColor())
+                closeIconTint = ColorStateList.valueOf(getCloseIconColor())
             } else {
                 if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                     chipBackgroundColor = resources.getColorStateList(R.color.color_item_dark)
