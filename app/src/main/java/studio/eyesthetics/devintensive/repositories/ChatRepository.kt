@@ -45,7 +45,7 @@ object ChatRepository {
         return chats.value!!.filter { it.isArchived }.lastOrNull()?.lastMessageShort()?.second ?: "author test"
     }
 
-    fun getMessageCount(): Int {
+    fun getArchiveUnreadMessageCount(): Int {
         return chats.value!!.filter { it.isArchived }.sumBy { it.unreadableMessageCount() }
     }
 }

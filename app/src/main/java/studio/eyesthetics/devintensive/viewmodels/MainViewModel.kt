@@ -59,14 +59,14 @@ class MainViewModel: ViewModel() {
     }
 
     private fun getArchiveItem(): ChatItem {
-        Log.d("M_MainViewModel", "${chatRepository.getMessageCount()}")
+        Log.d("M_MainViewModel", "${chatRepository.getArchiveUnreadMessageCount()}")
         return ChatItem(
             "none",
             "",
             "",
             "Архив чатов",
             chatRepository.getShortDescription(),
-            chatRepository.getMessageCount(),
+            chatRepository.getArchiveUnreadMessageCount(),
             chatRepository.getLastDate(),
             false,
             ChatType.ARCHIVE,
