@@ -20,7 +20,6 @@ data class Chat(
         return unread.size - 1
     }*/
     fun unreadableMessageCount(): Int {
-        Log.d("M_Chat", "${messages.count{ !it.isReaded} }")
         return messages.count{ !it.isReaded }
     }
 

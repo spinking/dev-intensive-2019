@@ -12,7 +12,7 @@ class ImageMessage(
     isIncoming: Boolean = false,
     date: Date = Date(),
     isReaded: Boolean = false,
-    var image: String?
+    var image: String
 ) : BaseMessage(id, from, chat, isIncoming, date) {
 
     override fun shortMessage(): String = "${from.firstName} - отправил фото"

@@ -22,7 +22,9 @@ object CacheManager {
     }
 
     fun nextChatId(): String {
-        return "${chats.value!!.size}"
+        //return "${chats.value!!.size}"
+        val lastId = chats.value!!.last().id.toInt() + 1
+        return lastId.toString()
     }
 
     fun insertChat(chat : Chat) {
