@@ -18,16 +18,16 @@ object ChatRepository {
 
     fun update(chat: Chat) {
         val copy = chats.value!!.toMutableList()
-        val find = chats.value!!.indexOfFirst{ it.id == chat.id }
-        if(find == -1) return
-        copy[find] = chat
+        val ind = chats.value!!.indexOfFirst{ it.id == chat.id }
+        if(ind == -1) return
+        copy[ind] = chat
         chats.value = copy
 
     }
 
     fun find(chatId: String): Chat? {
-        val find = chats.value!!.indexOfFirst { it.id == chatId }
-        return chats.value!!.getOrNull(find)
+        val ind = chats.value!!.indexOfFirst { it.id == chatId }
+        return chats.value!!.getOrNull(ind)
     }
 
     fun getArchiveChatsCount(): Int {
