@@ -161,7 +161,7 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
             tv_message_group.text = item.shortDescription
 
             with(tv_message_author) {
-                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
+                visibility = if (item.author != null) View.VISIBLE else View.GONE
                 text = item.author
             }
 
@@ -191,7 +191,7 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
             tv_message_archive.text = item.shortDescription
 
             with(tv_message_author_archive) {
-                visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
+                visibility = if (item.author != null) View.VISIBLE else View.GONE
                 text = item.author
             }
 

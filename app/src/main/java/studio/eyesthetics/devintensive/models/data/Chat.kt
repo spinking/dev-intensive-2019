@@ -52,7 +52,7 @@ data class Chat(
                 id,
                 user.avatar,
                 Utils.toInitials(user.firstName, user.lastName) ?: "??",
-                "${user.firstName ?: ""} ${user.lastName ?: ""}",
+                user.toUserItem().fullName,
                 lastMessageShort().first,
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat(),
