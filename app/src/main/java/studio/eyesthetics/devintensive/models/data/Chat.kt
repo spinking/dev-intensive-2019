@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.models.data
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
@@ -17,7 +16,7 @@ data class Chat(
     //@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     /*fun unreadableMessageCount(): Int {
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
-        return unread.size - 1
+        return unread.size
     }*/
     fun unreadableMessageCount(): Int {
         return messages.count{ !it.isReaded }

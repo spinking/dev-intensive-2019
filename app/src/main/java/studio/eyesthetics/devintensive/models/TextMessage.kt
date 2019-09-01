@@ -12,18 +12,14 @@ class TextMessage(
     chat: Chat,
     isIncoming: Boolean = false,
     date: Date = Date(),
-    isReaded: Boolean = false,
+    isReaded:Boolean = false,
     var text: String?
-) : BaseMessage(id, from, chat, isIncoming, date) {
-
-    companion object {
-        private const val MAX_LENGTH_OF_SHORT_MESSAGE = 128
-    }
+) : BaseMessage(id, from, chat, isIncoming, date, isReaded) {
 
     override fun shortMessage(): String =
         with(text) {
             if (this.isNullOrEmpty()) ""
-            else this.substring(0, min(this.length, MAX_LENGTH_OF_SHORT_MESSAGE))
+            else this.substring(0, min(this.length, 128))
         }
 
 
