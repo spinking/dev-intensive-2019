@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.*
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
@@ -58,6 +59,7 @@ class MainViewModel: ViewModel() {
     }
 
     private fun getArchiveItem(): ChatItem {
+        Log.d("M_MainViewModel", "${chatRepository.getMessageCount()}")
         return ChatItem(
             "none",
             "",

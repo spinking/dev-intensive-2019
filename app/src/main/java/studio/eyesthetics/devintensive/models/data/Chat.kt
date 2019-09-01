@@ -22,7 +22,7 @@ data class Chat(
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
         return unread.size - 1
     }*/
-    fun unreadableMessageCount(): Int = messages.count{ (it as TextMessage).isReaded.not() }
+    fun unreadableMessageCount(): Int = messages.count{ it.isReaded.not() }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
