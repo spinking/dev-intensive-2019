@@ -17,7 +17,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.group.GroupActivity
-import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
+//import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 import android.widget.TextView
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var viewModel: MainViewModel
-    private lateinit var archiveViewModel: ArchiveViewModel
+    //private lateinit var archiveViewModel: ArchiveViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +106,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        archiveViewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
-        archiveViewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
+        //archiveViewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
+        //archiveViewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it) })
     }
