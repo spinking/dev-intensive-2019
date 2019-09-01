@@ -13,7 +13,7 @@ data class Chat(
     var messages: MutableList<BaseMessage> = mutableListOf(),
     var isArchived: Boolean = false
 ) {
-    //@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     /*fun unreadableMessageCount(): Int {
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }
         return unread.size
