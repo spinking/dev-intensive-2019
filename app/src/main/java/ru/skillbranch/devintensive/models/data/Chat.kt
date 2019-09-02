@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.models.data
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
@@ -13,6 +14,25 @@ data class Chat(
     var messages: MutableList<BaseMessage> = mutableListOf(),
     var isArchived: Boolean = false
 ) {
+    companion object {
+        fun archivedToChatItem(chats: List<Chat>): ChatItem{
+            Log.d("M_Chat", "run archivedToChatItem")
+            val lastChat = chats.sortedBy { it.lastMessageDate() }.last()
+            return  ChatItem(
+                "-1",
+                "",
+                "",
+                "Архив чатов",
+                lastChat.lastMessageShort().first,
+                chats.sumBy { it.unreadableMessageCount() },
+                lastChat.lastMessageDate()?.shortFormat(),
+                false,
+                ChatType.ARCHIVE,
+                lastChat.lastMessageShort().second
+            )
+        }
+    }
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     /*fun unreadableMessageCount(): Int {
         val unread = messages.map { a -> ((a as TextMessage).isReaded).not() }

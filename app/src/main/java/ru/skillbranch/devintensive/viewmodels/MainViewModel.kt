@@ -3,8 +3,9 @@ package ru.skillbranch.devintensive.viewmodels
 import android.util.Log
 import androidx.lifecycle.*
 import ru.skillbranch.devintensive.extensions.mutableLiveData
+import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
-import ru.skillbranch.devintensive.models.data.ChatType
+import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 
 /**
@@ -13,32 +14,49 @@ import ru.skillbranch.devintensive.repositories.ChatRepository
 class MainViewModel: ViewModel() {
     private val query = mutableLiveData("")
     private val chatRepository =  ChatRepository
-    private val chats = Transformations.map(chatRepository.loadChats()) { chats ->
+    /*private val chats = Transformations.map(chatRepository.loadChats()) { chats ->
         return@map chats.filter { !it.isArchived }
             .map { it.toChatItem() }
             .sortedBy { it.id.toInt() }
+    }*/
+    private val chats: LiveData<List<ChatItem>> = Transformations.map(chatRepository.loadChats()) { chats ->
+        Log.d("M_MainViewModel", "test")
+        return@map chats.groupBy { it.isArchived }
+            .flatMap { (isArchived, chats) ->
+                if(isArchived) listOf(Chat.archivedToChatItem(chats))
+                else chats.map { it.toChatItem() }
+            }
+            .sortedBy { it.id.toInt() }
     }
 
-    fun getChatData() : LiveData<List<ChatItem>> {
+   /* fun getChatData() : LiveData<List<ChatItem>> {
         val result = MediatorLiveData<List<ChatItem>>()
-        var searchChats: MutableList<ChatItem>
+        val searchChats = mutableListOf<ChatItem>()
         val filterF = {
             val queryStr = query.value!!
-            if (chatRepository.getArchiveChatsCount() > 0) {
-                searchChats = mutableListOf(
-                    getArchiveItem()
-                )
-            } else {
-                searchChats = mutableListOf()
-            }
-
-            searchChats.addAll(chats.value!!)
+            //searchChats.addAll(chats.value!!)
 
             result.value = if (queryStr.isEmpty()) searchChats
             else searchChats.filter { it.title.contains(queryStr, true) }
         }
         result.addSource(chats) { filterF.invoke() }
         result.addSource(query) { filterF.invoke() }
+        return result
+    }*/
+
+    fun getChatData() : LiveData<List<ChatItem>> {
+        val result = MediatorLiveData<List<ChatItem>>()
+
+        val filterF = {
+            val queryStr = query.value!!
+            val chats = chats.value!!
+
+            result.value = if(queryStr.isEmpty()) chats
+            else chats.filter { it.title.contains(queryStr, true) }
+        }
+
+        result.addSource(chats) {filterF.invoke()}
+        result.addSource(query) {filterF.invoke()}
         return result
     }
 
@@ -58,7 +76,7 @@ class MainViewModel: ViewModel() {
         query.value = text
     }
 
-    private fun getArchiveItem(): ChatItem {
+    /*private fun getArchiveItem(): ChatItem {
         Log.d("M_MainViewModel", "${chatRepository.getArchiveUnreadMessageCount()}")
         return ChatItem(
             "none",
@@ -72,6 +90,6 @@ class MainViewModel: ViewModel() {
             ChatType.ARCHIVE,
             chatRepository.getLastAuthor()
         )
-    }
+    }*/
 
 }

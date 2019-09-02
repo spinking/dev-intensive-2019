@@ -446,7 +446,7 @@ object DataGenerator {
                     chat,
                     true,
                     user.lastVisit ?: Date(),
-                    (0..10).random() > 5,
+                    false,
                     randomTextPayload()
                 )
             )
