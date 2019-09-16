@@ -50,7 +50,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
         val inflater = LayoutInflater.from(parent.context)
         return when(viewType) {
             ARCHIVE_TYPE -> ArchiveViewHolder((inflater.inflate(R.layout.item_chat_archive, parent, false)))
-            SINGLE_TYPE -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
             GROUP_TYPE -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
             else -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
         }
