@@ -7,9 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_chat_single.*
 import kotlinx.android.synthetic.main.item_user_list.*
+import kotlinx.android.synthetic.main.item_user_list.sv_indicator
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.spToPixels
+import ru.skillbranch.devintensive.models.TextDrawable
 import ru.skillbranch.devintensive.models.data.UserItem
+import ru.skillbranch.devintensive.utils.Utils
 
 /**
  * Created by BashkatovSM on 26.08.2019
@@ -55,6 +61,15 @@ class UserAdapter(val listener: (UserItem) -> Unit) : RecyclerView.Adapter<UserA
             } else {
                 Glide.with(itemView).clear(iv_avatar_user)
                 //iv_avatar_user.setInitials(user.initials ?: "??")
+                iv_avatar_user.setImageDrawable(
+                    TextDrawable
+                        .builder()
+                        .beginConfig()
+                        .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
+                        .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
+                        .fontSize(48.spToPixels)
+                        .endConfig()
+                        .buildRound(user.initials ?: "", Utils.randomColor()))
             }
             sv_indicator.visibility = if(user.isOnline) View.VISIBLE else View.GONE
             tv_user_name.text = user.fullName

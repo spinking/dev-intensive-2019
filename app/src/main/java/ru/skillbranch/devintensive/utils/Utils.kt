@@ -1,5 +1,9 @@
 package ru.skillbranch.devintensive.utils
 
+import android.graphics.Color
+import android.util.Log
+import kotlin.random.Random
+
 /**
  * Created by Spinking on 27.06.2019.
  */
@@ -115,5 +119,10 @@ object Utils {
         val p = Regex("\\s")
         if (first.matches(p)) return null
         return first.toUpperCase()
+    }
+
+    fun randomColor(): Int {
+        val random = Random
+        return Color.argb(255, random.nextInt(255), random.nextInt(255), random.nextInt(255))
     }
 }

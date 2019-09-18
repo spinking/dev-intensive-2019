@@ -22,7 +22,7 @@ import ru.skillbranch.devintensive.extensions.pxToDimensionPixels
 /**
  * Created by BashkatovSM on 01.08.2019
  */
-class CircleImageView @JvmOverloads constructor(
+open class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
