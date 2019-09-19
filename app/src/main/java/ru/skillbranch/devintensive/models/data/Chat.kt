@@ -82,7 +82,7 @@ data class Chat(
             ChatItem(
                 id,
                 null,
-                "",
+                "??",
                 title,
                 lastMessageShort().first,
                 unreadableMessageCount(),

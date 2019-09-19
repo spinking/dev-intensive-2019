@@ -60,8 +60,8 @@ class UserAdapter(val listener: (UserItem) -> Unit) : RecyclerView.Adapter<UserA
                     .into(iv_avatar_user)
             } else {
                 Glide.with(itemView).clear(iv_avatar_user)
-                //iv_avatar_user.setInitials(user.initials ?: "??")
-                iv_avatar_user.setImageDrawable(
+                iv_avatar_user.setInitials(user.initials ?: "??")
+                /*iv_avatar_user.setImageDrawable(
                     TextDrawable
                         .builder()
                         .beginConfig()
@@ -69,7 +69,7 @@ class UserAdapter(val listener: (UserItem) -> Unit) : RecyclerView.Adapter<UserA
                         .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
                         .fontSize(48.spToPixels)
                         .endConfig()
-                        .buildRound(user.initials ?: "", Utils.randomColor()))
+                        .buildRound(user.initials ?: "", Utils.randomColor()))*/
             }
             sv_indicator.visibility = if(user.isOnline) View.VISIBLE else View.GONE
             tv_user_name.text = user.fullName
