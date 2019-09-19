@@ -1,10 +1,10 @@
 package ru.skillbranch.devintensive.ui.adapters
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.RectF
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
+import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
@@ -112,14 +112,19 @@ class ChatItemTouchHelperCallback(
     }
 
     private fun drawBackground(canvas: Canvas, itemView: View, dX: Float) {
+        val evaluator = ArgbEvaluator()
         with(bgRect) {
-            left = itemView.left.toFloat()
+            left = itemView.right.toFloat() + dX
             top = itemView.top.toFloat()
             right = itemView.right.toFloat()
             bottom = itemView.bottom.toFloat()
         }
         with(bgPaint) {
-            color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_accent_night else R.color.color_primary_dark)
+
+            color = evaluator.evaluate(0.3f, R.color.color_accent, R.color.color_accent_night) as Int
+
+
+            //color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_accent_night else R.color.color_primary_dark)
 
             /*if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
 
@@ -128,6 +133,8 @@ class ChatItemTouchHelperCallback(
                 color = itemView.resources.getColor(R.color.color_primary_dark)
             }*/
             //ДЗ при свайпе прямоугольник должен менять цвет последовательно через промежуточные значения
+
+            Log.d("M_ChatItemTouchHelper", "$color")
 
             canvas.drawRect(bgRect, bgPaint)
         }
