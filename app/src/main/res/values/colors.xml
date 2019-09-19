@@ -21,7 +21,7 @@
     <color name="color_snackbar_text_light">#FFFFFF</color>
     <color name="color_snackbar_text_dark">#121212</color>
 
-    <!--AvatarImageView colors-->
+    <!--AvatarImageView colors 00:41:38, 5 tutorial-->
     <color name="color_avatar_1">#7BC862</color>
     <color name="color_avatar_2">#E17076</color>
     <color name="color_avatar_3">#FAA774</color>
