@@ -20,4 +20,13 @@
     <color name="color_toolbar_night">#272727</color>
     <color name="color_snackbar_text_light">#FFFFFF</color>
     <color name="color_snackbar_text_dark">#121212</color>
+
+    <!--AvatarImageView colors-->
+    <color name="color_avatar_1">#7BC862</color>
+    <color name="color_avatar_2">#E17076</color>
+    <color name="color_avatar_3">#FAA774</color>
+    <color name="color_avatar_4">#6EC9CB</color>
+    <color name="color_avatar_5">#65AADD</color>
+    <color name="color_avatar_6">#A695E7</color>
+    <color name="color_avatar_7">#EE7AAE</color>
 </resources>
