@@ -20,6 +20,8 @@
         <item name="colorDoneIcon">@color/color_primary</item>
         <item name="colorChip">@color/color_primary_light</item>
         <item name="colorChipCloseIcon">@color/color_item_light</item>
+        <item name="colorEvaluationStart">@color/color_item_light</item>
+        <item name="colorEvaluationEnd">@color/color_primary_dark</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>

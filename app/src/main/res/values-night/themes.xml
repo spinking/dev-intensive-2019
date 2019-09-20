@@ -21,6 +21,8 @@
         <item name="colorDoneIcon">@color/color_accent_night</item>
         <item name="colorChip">@color/color_item_dark</item>
         <item name="colorChipCloseIcon">@color/color_gray</item>
+        <item name="colorEvaluationStart">@color/color_item_dark</item>
+        <item name="colorEvaluationEnd">@color/color_toolbar_night</item>
     </style>
 
 </resources>

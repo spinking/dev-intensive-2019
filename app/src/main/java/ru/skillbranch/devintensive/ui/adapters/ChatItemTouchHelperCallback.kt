@@ -1,21 +1,14 @@
 package ru.skillbranch.devintensive.ui.adapters
 
 import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
-import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 
 /**
  * Created by BashkatovSM on 26.08.2019
@@ -121,29 +114,16 @@ class ChatItemTouchHelperCallback(
         }
         with(bgPaint) {
 
-            color = evaluator.evaluate(0.3f, R.color.color_accent, R.color.color_accent_night) as Int
 
-
-            //color = ContextCompat.getColor(App.applicationContext(), if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)R.color.color_accent_night else R.color.color_primary_dark)
-
-            /*if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-
-                //color = itemView.resources.getColor(R.color.color_primary_dark, itemView.context.theme)
-            } else {
-                color = itemView.resources.getColor(R.color.color_primary_dark)
-            }*/
-            //ДЗ при свайпе прямоугольник должен менять цвет последовательно через промежуточные значения
-
-            Log.d("M_ChatItemTouchHelper", "$color")
+            val startColor = TypedValue()
+            val endColor = TypedValue()
+            itemView.context.theme.resolveAttribute(R.attr.colorEvaluationStart, startColor, true)
+            itemView.context.theme.resolveAttribute(R.attr.colorEvaluationEnd, endColor, true)
+            color = evaluator.evaluate((dX / itemView.right) * -1, startColor.data, endColor.data) as Int
 
             canvas.drawRect(bgRect, bgPaint)
         }
     }
-}
-
-enum class TypeOfActivity {
-    ARCHIVE_ACTIVITY,
-    MAIN_ACTIVITY
 }
 
 interface ItemTouchViewHolder{
