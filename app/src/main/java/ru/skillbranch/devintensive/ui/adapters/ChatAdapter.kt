@@ -17,7 +17,6 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
-import kotlin.random.Random
 
 /**
  * Created by BashkatovSM on 26.08.2019
@@ -56,8 +55,6 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
     }
 
     fun updateData(data : List<ChatItem>) {
-        /*Log.d("M_ChatAdapter", "update data adapter - new data ${data.size} hash : ${data.hashCode()}" +
-            "old data ${items.size} hash: ${items.hashCode()}")*/
 
         val diffCallback = object :DiffUtil.Callback() {
             override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean = items[oldPos].id == data[newPos].id
@@ -187,11 +184,6 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
                 visibility = if (item.author != null) View.VISIBLE else View.GONE
                 text = "@${item.author}"
             }
-
-            /*itemView.setOnClickListener{
-                val intent = Intent(context, ArchiveActivity::class.java)
-                context.startActivity(intent)
-            }*/
 
             itemView.setOnClickListener {
                 listener.invoke(item)
