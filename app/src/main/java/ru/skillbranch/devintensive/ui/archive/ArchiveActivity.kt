@@ -35,7 +35,7 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        chatAdapter = ChatAdapter(this){
+        chatAdapter = ChatAdapter{
             val snackbar = Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
             val snackBarView = snackbar.view
             snackBarView.background = getDrawable(R.drawable.bg_snackbar)

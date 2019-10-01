@@ -1,7 +1,5 @@
 package ru.skillbranch.devintensive.ui.adapters
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -17,18 +15,14 @@ import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.extensions.spToPixels
-import ru.skillbranch.devintensive.models.TextDrawable
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
-import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
-import ru.skillbranch.devintensive.utils.Utils
 import kotlin.random.Random
 
 /**
  * Created by BashkatovSM on 26.08.2019
  */
-class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
+class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
 
     companion object {
         private const val ARCHIVE_TYPE = 0
@@ -37,7 +31,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
     }
 
     var items: List<ChatItem> = listOf()
-    val context = context
 
     override fun getItemViewType(position: Int): Int {
         return when(items[position].chatType) {
@@ -103,19 +96,10 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
             if(item.avatar == null) {
-                val random = Random
                 //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
                 Glide.with(itemView)
                     .clear(iv_avatar_single)
                 iv_avatar_single.setInitials(item.initials)
-                /*iv_avatar_single.setImageDrawable(TextDrawable
-                    .builder()
-                    .beginConfig()
-                    .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
-                    .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
-                    .fontSize(48.spToPixels)
-                    .endConfig()
-                    .buildRound(item.initials, Utils.randomColor()))*/
             } else {
                 Glide.with(itemView)
                     .load(item.avatar)
@@ -155,14 +139,6 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
             //add custom avatar view, будет позже мастер класс, time: 0:41 tutorial 5
             iv_avatar_group.setInitials(item.initials)
-            /*iv_avatar_group.setImageDrawable(TextDrawable
-                .builder()
-                .beginConfig()
-                .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
-                .height(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
-                .fontSize(48.spToPixels)
-                .endConfig()
-                .buildRound(item.initials, Utils.randomColor()))*/
 
             with(tv_date_group) {
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
@@ -212,9 +188,13 @@ class ChatAdapter(context: Context, val listener : (ChatItem) -> Unit): Recycler
                 text = "@${item.author}"
             }
 
-            itemView.setOnClickListener{
+            /*itemView.setOnClickListener{
                 val intent = Intent(context, ArchiveActivity::class.java)
                 context.startActivity(intent)
+            }*/
+
+            itemView.setOnClickListener {
+                listener.invoke(item)
             }
         }
     }

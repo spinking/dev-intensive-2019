@@ -19,6 +19,8 @@ import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 import android.widget.TextView
+import ru.skillbranch.devintensive.models.data.ChatType
+import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -60,13 +62,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        chatAdapter = ChatAdapter(this){
-            val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
-            val snackBarView = snackbar.view
-            snackBarView.background = getDrawable(R.drawable.bg_snackbar)
-            val textView: TextView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text)
-            textView.setTextColor(getSnackbarColor())
-            snackbar.show()
+        chatAdapter = ChatAdapter{ item ->
+            when(item.chatType) {
+                ChatType.ARCHIVE -> {
+                    val intent = Intent(this, ArchiveActivity::class .java)
+                    startActivity(intent)
+                }
+                else -> {
+                    val snackbar = Snackbar.make(rv_chat_list, "Click on ${item.title}", Snackbar.LENGTH_LONG)
+                    val snackBarView = snackbar.view
+                    snackBarView.background = getDrawable(R.drawable.bg_snackbar)
+                    val textView: TextView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text)
+                    textView.setTextColor(getSnackbarColor())
+                    snackbar.show()
+                }
+            }
+
         }
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
