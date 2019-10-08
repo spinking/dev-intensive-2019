@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.adapters
 import android.animation.ArgbEvaluator
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -13,10 +14,9 @@ import ru.skillbranch.devintensive.models.data.ChatItem
 /**
  * Created by BashkatovSM on 26.08.2019
  */
-class ChatItemTouchHelperCallback(
-    val activity: String,
-    val adapter: ChatAdapter,
-    val swipeListener : (ChatItem) -> Unit
+open class ChatItemTouchHelperCallback(
+    private val adapter: ChatAdapter,
+    private val swipeListener : (ChatItem) -> Unit
 ): ItemTouchHelper.Callback() {
     private val bgRect = RectF()
     private val iconBounds = Rect()
@@ -72,22 +72,8 @@ class ChatItemTouchHelperCallback(
     }
 
     private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
-        val icon: Drawable
 
-        when(activity) {
-            "archive activity" -> if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp, itemView.context.theme)
-            } else {
-                icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp)
-            }
-            else -> if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp, itemView.context.theme)
-            } else {
-                icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp)
-            }
-
-        }
-
+        val icon: Drawable = getIcon(itemView)
 
         val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.icon_size)
         val space = itemView.resources.getDimensionPixelSize(R.dimen.spacing_normal_16)
@@ -102,6 +88,16 @@ class ChatItemTouchHelperCallback(
 
         icon.bounds = iconBounds
         icon.draw(canvas)
+    }
+
+    open fun getIcon(itemView: View): Drawable {
+        val icon: Drawable
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp, itemView.context.theme)
+        } else {
+            icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp)
+        }
+        return icon
     }
 
     private fun drawBackground(canvas: Canvas, itemView: View, dX: Float) {
@@ -129,4 +125,19 @@ class ChatItemTouchHelperCallback(
 interface ItemTouchViewHolder{
     fun onItemSelected()
     fun onItemCleared()
+}
+
+class ArchiveItemTouchHelperCallback constructor(
+    adapter: ChatAdapter,
+    swipeListener: (ChatItem) -> Unit
+): ChatItemTouchHelperCallback(adapter, swipeListener) {
+    override fun getIcon(itemView: View): Drawable {
+        val icon: Drawable
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp, itemView.context.theme)
+        } else {
+            icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp)
+        }
+        return icon
+    }
 }

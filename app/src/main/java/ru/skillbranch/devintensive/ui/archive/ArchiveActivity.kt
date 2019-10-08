@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.ui.adapters.ArchiveItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
@@ -46,7 +47,7 @@ class ArchiveActivity : AppCompatActivity() {
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         divider.setDrawable(getDrawable(R.drawable.divider))
-        val touchCallback = ChatItemTouchHelperCallback("archive activity" ,chatAdapter) {
+        val touchCallback = ArchiveItemTouchHelperCallback(chatAdapter) {
             viewModel.restoreFromArchive(it.id)
 
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5

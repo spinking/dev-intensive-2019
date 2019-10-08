@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         //ДЗ кастом материал декоратор time: 1:13 tutorial 5
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         divider.setDrawable(getDrawable(R.drawable.divider))
-        val touchCallback = ChatItemTouchHelperCallback("main activity" ,chatAdapter) {
+        val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
             viewModel.addToArchive(it.id)
 
             //ДЗ добавить обработчик отмены добавления time: 1:33 tutorial 5
